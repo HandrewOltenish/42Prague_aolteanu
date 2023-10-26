@@ -1,53 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aolteanu <aolteanu.student@42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/18 17:29:06 by aolteanu          #+#    #+#             */
-/*   Updated: 2023/10/23 16:22:10 by aolteanu         ###   ########.fr       */
+/*   Created: 2023/10/18 17:13:13 by aolteanu          #+#    #+#             */
+/*   Updated: 2023/10/26 13:08:30 by aolteanu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
 #include <stdio.h>
 #include <string.h>
 
-void	*ft_memmove(void	*dest, const void	*src, size_t	n)
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	char			*pointer_dest;
 	const char		*pointer_src;
+	char			*pointer_dest;
 	size_t			count;
 
-	pointer_dest = dest;
 	pointer_src = src;
+	pointer_dest = dest;
 	count = 0;
-	if (pointer_src <= pointer_dest)
+	while (count < n)
 	{
-		while (count < n)
-		{
-			pointer_dest[count] = pointer_src[count];
-			count++;
-		}
-	}
-	else if (n <= sizeof(pointer_dest))
-	{
-		while (count < n)
-		{
-			pointer_dest[count] = pointer_src[count];
-			count++;
-		}
+		pointer_dest[count] = pointer_src[count];
+		count++;
 	}
 	return (pointer_dest);
 }
-
+//For ft_memcpy it doesn't show when it overflows.
 // int	main(void)
 // {
-// 	char	src[] = "Le fabuleux destin d'";
-//     char	dest[] = "Amelie Poulain";
+// 	char	src[] = "-99 Problems but memcpy ain't one";
+// 	char	dest[8] = "--";
 
-// 	printf("String before moving bytes: %s\n", src);
-// 	ft_memmove(src + 21, dest, 14);
-// 	printf("String after moving bytes: %s\n", src);
+// 	ft_memcpy(dest, src, 10);
+// 	printf("\n%s\n", dest);
 // 	return (0);
 // }

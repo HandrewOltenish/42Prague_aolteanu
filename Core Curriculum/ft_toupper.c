@@ -15,24 +15,25 @@
 #include <ctype.h>
 #include <stdio.h>
 
-int ft_toupper(int  c)
+int	ft_toupper(int c)
 {
-    unsigned char  character;
-   
-    character = c;
-    if(97 <= c <= 122)
-    {
-        character = character - 32;
-    }
-    else return (c);
-    return (character);
+	unsigned char	character;
+
+	character = c;
+	if (97 <= c <= 122)
+	{
+		character = character - 32;
+	}
+	else
+		return (c);
+	return (character);
 }
 
-int main(void)
-{
-    int c;
-    c = 97;
-    printf("Original Character:%c\n", c);
-    printf("Uppercase Character:%c\n", ft_toupper(c));
-    return (0);
-}
+// int main(void)
+// {
+//     int c;
+//     c = 97;
+//     printf("Original Character:%c\n", c);
+//     printf("Uppercase Character:%c\n", ft_toupper(c));
+//     return (0);
+// }
