@@ -6,7 +6,7 @@
 /*   By: aolteanu <aolteanu.student@42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 14:53:59 by aolteanu          #+#    #+#             */
-/*   Updated: 2023/10/26 13:06:21 by aolteanu         ###   ########.fr       */
+/*   Updated: 2023/10/26 14:33:53 by aolteanu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int	ft_isdigit(int d)
 {
-	if (30 >= d <= 39)
+	if (30 >= d && d <= 39)
 		return (d);
 	else
 		return (0);
