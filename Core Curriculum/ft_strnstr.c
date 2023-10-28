@@ -6,7 +6,7 @@
 /*   By: aolteanu <aolteanu.student@42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 17:35:48 by aolteanu          #+#    #+#             */
-/*   Updated: 2023/10/27 22:13:10 by aolteanu         ###   ########.fr       */
+/*   Updated: 2023/10/28 18:53:49 by aolteanu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,36 +20,38 @@
 //		If little is an empty string, big is returned; if little occurs
 //	nowhere in big, NULL is returned; otherwise a pointer to the first
 //	character of the first occurrence of little is returned.
-
+//
+// We need a temp array where to put the found characters then compare
 #include <bsd/string.h>
 #include <stdio.h>
 
 char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
-	char	*pointer;
-	char	*counter;
-	int	index_little;
-	int	index_big;
+	const char	*address;
+	int			index_little;
+	int			index_big;
+	int			counter;
 
+	counter = sizeof(little);
 	index_little = 0;
 	index_big = 0;
-
-	while (big[index_big] != '\0' && little[index_little] != '\0' && len > 0)
-	{
-		if (little[index_little] == big[index_big])
-		{
-			counter = (char *)&big[index_big];
-			index_little++;
-		}
-		index_big++;
-		len--;
-	}
-	if (!little)
-		return ((char *)big);
-	if (*little != *big)
+	if ((!big || !little) && len == 0)
 		return (NULL);
-	else
-		return ((char *)big);
+	else if (!little)
+		return((char *)big);
+	while (big[index_big] != '\0' && len > 0)
+	{
+		while (little[index_little] == big[index_big] && counter > 0)
+			counter--;
+		if (little[index_little] != big[index_big])
+			counter = sizeof(little);
+		address = (char *)&big[index_big-index_little];
+		len--;
+		index_little++;
+		index_big++;
+	}
+	if (counter == 1)
+		return ((char *)address);
 }
 
 int main()
