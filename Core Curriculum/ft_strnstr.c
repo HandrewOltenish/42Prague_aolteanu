@@ -6,7 +6,7 @@
 /*   By: aolteanu <aolteanu.student@42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 17:35:48 by aolteanu          #+#    #+#             */
-/*   Updated: 2023/10/28 18:53:49 by aolteanu         ###   ########.fr       */
+/*   Updated: 2023/10/29 15:37:45 by aolteanu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,47 +25,74 @@
 #include <bsd/string.h>
 #include <stdio.h>
 
-char	*ft_strnstr(const char *big, const char *little, size_t len)
+static int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	const char	*address;
-	int			index_little;
-	int			index_big;
-	int			counter;
+	int	i;
+	int	value;
+	int	index;
 
-	counter = sizeof(little);
-	index_little = 0;
-	index_big = 0;
-	if ((!big || !little) && len == 0)
-		return (NULL);
-	else if (!little)
-		return((char *)big);
-	while (big[index_big] != '\0' && len > 0)
+	i = 0;
+	value = 0;
+	index = n;
+	while (!value && (s1[i] || s2[i]) && i < index)
 	{
-		while (little[index_little] == big[index_big] && counter > 0)
-			counter--;
-		if (little[index_little] != big[index_big])
-			counter = sizeof(little);
-		address = (char *)&big[index_big-index_little];
-		len--;
-		index_little++;
-		index_big++;
+		value = s1[i] - s2[i];
+		i++;
 	}
-	if (counter == 1)
-		return ((char *)address);
+	if (value > 0)
+	{
+		return (1);
+	}
+	if (value < 0)
+	{
+		return (-1);
+	}
+	else
+		return (0);
 }
 
-int main()
+static size_t	ft_strlen(char *s)
 {
-	char	*big = "Biggus Dickus";
-	char	*little = "Dick";
-	size_t	len = 13;
-	char	*big2 = "Biggus Dickus";
-	char	*little2 = "Dick";
-	size_t	len2 = 13;
+	int	i;
 
-	printf("Fellas is it gay to search a string?\n%s\n%s\n", big, little);
-	printf("Searched upon %zu byte(s) and found this:\n%p\n", len, ft_strnstr(big, little, len));
-	printf("Fellas is it gay to search a string?\n%s\n%s\n", big2, little2);
-	printf("Searched upon %zu byte(s) and found this:\n%p\n", len2, strnstr(big2, little2, len2));
-	return (0);
+	i = 0;
+	while (s[i] != '\0')
+	{
+		i++;
+	}
+	return (i);
 }
+
+char    *ft_strnstr(const char *big, const char *little, size_t len)
+{
+    size_t  little_len;
+    if ((!big || !little) && len == 0)
+        return (NULL);
+    little_len = ft_strlen((char *)little);
+    if (little_len == 0)
+        return ((char *)big);
+    while (*big && len >= little_len)
+    {
+        if (*big == *little && ft_strncmp(big, little, little_len) == 0)
+            return ((char *)big);
+        big++;
+        len--;
+    }
+    return (NULL);
+}
+
+// int main()
+// {
+// 	char	*big = "Biggus Dickus";
+// 	char	*little = "Dick";
+// 	size_t	len = 13;
+// 	char	*big2 = "Biggus Dickus";
+// 	char	*little2 = "Dick";
+// 	size_t	len2 = 13;
+
+// 	printf("Fellas is it gay to search a string?\n%s\n%s\n", big, little);
+// 	printf("Searched upon %zu byte(s) and found this:\n%p\n", len, ft_strnstr(big, little, len));
+// 	printf("Fellas is it gay to search a string?\n%s\n%s\n", big2, little2);
+// 	printf("Searched upon %zu byte(s) and found this:\n%p\n", len2, strnstr(big2, little2, len2));
+// 	return (0);
+// }
