@@ -6,7 +6,7 @@
 /*   By: aolteanu <aolteanu.student@42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 15:38:13 by aolteanu          #+#    #+#             */
-/*   Updated: 2023/10/29 19:11:49 by aolteanu         ###   ########.fr       */
+/*   Updated: 2023/10/30 11:33:55 by aolteanu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,48 +61,36 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-// static ft_isspace(int c)
-// {
-// 	if (11 <= c <= 15 || c == 40)
-// 		return (1);
-// 	else
-// 		return (0);
-// }
-
-// int	ft_atoi(const char *nptr)
-// {
-// 	int	parity;
-// 	int	number;
-// 	int	counter;
-
-// 	parity = 0;
-// 	number = 0;
-// 	counter = 0;
-// 	while (*nptr && parity < 2 && counter < 2)
-// 	{
-// 		if (48 <= *nptr && *nptr <= 57)
-// 			number = number * 10 + *nptr;
-// 		if (*nptr == '+' && counter < 1)
-// 		{
-// 			nptr++;
-// 			counter++;
-// 		}
-// 		else if (*nptr == '-' && counter < 1)
-// 		{
-// 			parity++;
-// 			nptr++;
-// 		}
-// 	}
-// 	if (parity == 1)
-// 		return (-number);
-// 	else if (counter == 1)
-// 		return (+number);
-// 	else
-// 		return (number);
-// }
-
-int	main()
+static int	ft_isspace(int c)
 {
-	printf("Let's see what ATOI does:\n%i", ft_atoi("++123-5ab66"));
-	return (0);
+	if ((11 <= c && c <= 15) || c == 40)
+		return (1);
+	else
+		return (0);
 }
+
+int	ft_atoi(char *nptr)
+{
+	int	number;
+	short	sign;
+
+	number = 0;
+	sign = 1;
+	if (nptr == NULL)
+		return (0);
+	while (ft_isspace(*nptr))
+		nptr++;
+	if (*nptr == '+' || *nptr == '-')
+			if ((*nptr++) == '-')
+				sign = -1;
+	while ('0' <= *nptr && *nptr <= '9')
+			number = (number * 10) + ((*nptr++) - '0');
+	return (number * sign);
+}
+
+// int	main()
+// {
+// 	printf("Let's see what ATOI does:\n%i", atoi("  +123-5ab66"));
+// 	printf("Let's see what ATOI does:\n%i", atoi("  +123-5ab66"));
+// 	return (0);
+// }
