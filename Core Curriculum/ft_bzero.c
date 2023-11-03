@@ -6,9 +6,13 @@
 /*   By: aolteanu <aolteanu.student@42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 14:57:29 by aolteanu          #+#    #+#             */
-/*   Updated: 2023/10/26 12:41:20 by aolteanu         ###   ########.fr       */
+/*   Updated: 2023/11/01 18:18:02 by aolteanu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+//		The bzero() function erases the data in the n bytes of the memory
+//	starting at the location pointed to by s, by writing zeros (bytes
+//	containing '\0') to that area.
 
 #include <stdio.h>
 #include <strings.h>

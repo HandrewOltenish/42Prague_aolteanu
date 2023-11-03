@@ -6,7 +6,7 @@
 /*   By: aolteanu <aolteanu.student@42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 14:19:51 by aolteanu          #+#    #+#             */
-/*   Updated: 2023/10/30 14:55:36 by aolteanu         ###   ########.fr       */
+/*   Updated: 2023/11/01 18:30:56 by aolteanu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,38 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-//void *malloc (size_t size)
-//void *calloc(size_t nmemb, size_t size)
 
-int main()
+static void	ft_bzero(void *s, size_t n)
 {
-	printf("This is the pointer to address allocated by calloc:%p", calloc(2, 10));
-	return (0);
+	unsigned char	*pointer_alpha;
+	size_t			count;
+
+	pointer_alpha = s;
+	count = 0;
+	while (count < n)
+	{
+		pointer_alpha[count] = '\0';
+		count++;
+	}
 }
+
+void	*ft_calloc(size_t nmemb, size_t size)
+{
+	int	*p;
+
+	if (nmemb == 0 || size == 0)
+		return (NULL);
+	else
+	{
+		p = malloc(nmemb * sizeof(char));
+		bzero(p, nmemb * size);
+		return (p);
+	}
+}
+
+// int main()
+// {
+// 	printf("This is the pointer to address
+// allocated by calloc:%p", calloc(2, 10));
+// 	return (0);
+// }
