@@ -1,2 +1,2 @@
-# 42Prague_aolteanu_Core_Curriculum
+# 42Prague_aolteanu
 This is the repository for 42 courses
