@@ -6,7 +6,7 @@
 /*   By: aolteanu <aolteanu.student@42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 16:17:30 by aolteanu          #+#    #+#             */
-/*   Updated: 2023/10/27 17:24:14 by aolteanu         ###   ########.fr       */
+/*   Updated: 2023/11/14 21:16:31 by aolteanu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,10 @@
 //	unsigned char) that differ in s1 and s2.
 //		If n is zero, the return value is zero.
 
-#include <string.h>
-#include <stdio.h>
+// #include <string.h>
+// #include <stdio.h>
+
+#include "libft.h"
 
 int	ft_memcmp(const void	*s1, const void	*s2, size_t	n)
 {

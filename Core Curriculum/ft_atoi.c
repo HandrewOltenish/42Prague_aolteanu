@@ -6,7 +6,7 @@
 /*   By: aolteanu <aolteanu.student@42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 15:38:13 by aolteanu          #+#    #+#             */
-/*   Updated: 2023/10/30 11:33:55 by aolteanu         ###   ########.fr       */
+/*   Updated: 2023/11/14 21:52:07 by aolteanu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,10 @@
 //	(and returns 0).  In particular, if *nptr is not '\0'  but
 //  **endptr is '\0' on return, the entire string is valid.
 
-#include <stdlib.h>
-#include <stdio.h>
+// #include <stdlib.h>
+// #include <stdio.h>
+
+#include "libft.h"
 
 static int	ft_isspace(int c)
 {
@@ -69,7 +71,7 @@ static int	ft_isspace(int c)
 		return (0);
 }
 
-int	ft_atoi(char *nptr)
+int	ft_atoi(const char *nptr)
 {
 	int	number;
 	short	sign;

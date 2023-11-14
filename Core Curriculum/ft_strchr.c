@@ -15,8 +15,10 @@
 //The  terminating null byte is considered part of the string, so that
 //if c is specified as '\0', these functions return a
 //pointer to the terminator.
-#include <string.h>
-#include <stdio.h>
+// #include <string.h>
+// #include <stdio.h>
+
+#include "libft.h"
 
 char	*ft_strchr(const char	*s, int c)
 {

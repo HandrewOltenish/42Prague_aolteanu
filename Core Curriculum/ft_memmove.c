@@ -6,12 +6,14 @@
 /*   By: aolteanu <aolteanu.student@42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 17:29:06 by aolteanu          #+#    #+#             */
-/*   Updated: 2023/10/27 16:14:42 by aolteanu         ###   ########.fr       */
+/*   Updated: 2023/11/14 21:16:53 by aolteanu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <string.h>
+// #include <stdio.h>
+// #include <string.h>
+
+#include "libft.h"
 
 void	*ft_memmove(void	*dest, const void	*src, size_t	n)
 {

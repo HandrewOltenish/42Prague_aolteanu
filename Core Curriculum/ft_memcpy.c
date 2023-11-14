@@ -6,13 +6,15 @@
 /*   By: aolteanu <aolteanu.student@42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 17:13:13 by aolteanu          #+#    #+#             */
-/*   Updated: 2023/10/26 13:08:30 by aolteanu         ###   ########.fr       */
+/*   Updated: 2023/11/14 21:16:46 by aolteanu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdio.h>
-#include <string.h>
+// #include <unistd.h>
+// #include <stdio.h>
+// #include <string.h>
+
+#include "libft.h"
 
 void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
@@ -30,6 +32,7 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	}
 	return (pointer_dest);
 }
+
 //For ft_memcpy it doesn't show when it overflows.
 // int	main(void)
 // {

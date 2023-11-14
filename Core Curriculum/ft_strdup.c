@@ -6,7 +6,7 @@
 /*   By: aolteanu <aolteanu.student@42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 18:29:18 by aolteanu          #+#    #+#             */
-/*   Updated: 2023/11/01 19:15:26 by aolteanu         ###   ########.fr       */
+/*   Updated: 2023/11/14 21:17:39 by aolteanu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,11 @@
 //to increment on same line you can use
 // str2[counter] = str[counter++] on last line of loop
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+// #include <stdio.h>
+// #include <stdlib.h>
+// #include <string.h>
+
+#include "libft.h"
 
 char	*ft_strdup(const char	*s)
 {
@@ -44,11 +46,11 @@ char	*ft_strdup(const char	*s)
 	return(result);
 }
 
-int	main()
-{
-	char	*our;
+// int	main()
+// {
+// 	char	*our;
 	
-	our = ft_strdup("hello");
-	free(our);
-	return (0);
-}
+// 	our = ft_strdup("hello");
+// 	free(our);
+// 	return (0);
+// }

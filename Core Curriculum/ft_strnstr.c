@@ -6,7 +6,7 @@
 /*   By: aolteanu <aolteanu.student@42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 17:35:48 by aolteanu          #+#    #+#             */
-/*   Updated: 2023/10/29 15:37:45 by aolteanu         ###   ########.fr       */
+/*   Updated: 2023/11/14 21:50:31 by aolteanu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,46 +22,10 @@
 //	character of the first occurrence of little is returned.
 //
 // We need a temp array where to put the found characters then compare
-#include <bsd/string.h>
-#include <stdio.h>
+// #include <bsd/string.h>
+// #include <stdio.h>
 
-static int	ft_strncmp(const char *s1, const char *s2, size_t n)
-{
-	int	i;
-	int	value;
-	int	index;
-
-	i = 0;
-	value = 0;
-	index = n;
-	while (!value && (s1[i] || s2[i]) && i < index)
-	{
-		value = s1[i] - s2[i];
-		i++;
-	}
-	if (value > 0)
-	{
-		return (1);
-	}
-	if (value < 0)
-	{
-		return (-1);
-	}
-	else
-		return (0);
-}
-
-static size_t	ft_strlen(char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i] != '\0')
-	{
-		i++;
-	}
-	return (i);
-}
+#include "libft.h"
 
 char    *ft_strnstr(const char *big, const char *little, size_t len)
 {

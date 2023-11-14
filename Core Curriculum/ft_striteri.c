@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   UNFINISHED_ft_striteri.c                           :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aolteanu <aolteanu.student@42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 12:16:21 by aolteanu          #+#    #+#             */
-/*   Updated: 2023/11/14 15:02:33 by aolteanu         ###   ########.fr       */
+/*   Updated: 2023/11/14 21:17:45 by aolteanu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@
 // as first argument. Each character is passed by
 // address to ’f’ to be modified if necessary.
 
-#include <stdio.h>
-#include <stdlib.h>
+// #include <stdio.h>
+// #include <stdlib.h>
+
+#include "libft.h"
 
 void	f(unsigned int index, char *s)
 {

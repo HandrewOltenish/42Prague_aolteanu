@@ -6,7 +6,7 @@
 /*   By: aolteanu <aolteanu.student@42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 14:43:57 by aolteanu          #+#    #+#             */
-/*   Updated: 2023/11/14 15:41:18 by aolteanu         ###   ########.fr       */
+/*   Updated: 2023/11/14 21:54:09 by aolteanu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,10 @@
 // of ’s1’ and ’s2’
 // Returns the new string or NULL if the allocation fails.
 
-#include <stdio.h>
-#include <stdlib.h>
+// #include <stdio.h>
+// #include <stdlib.h>
 
-static size_t	ft_strlen(char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i] != '\0')
-	{
-		i++;
-	}
-	return (i);
-}
+#include "libft.h"
 
 // The following function is 20 lines
 char	*ft_strjoin(char const	*s1, char const	*s2)
@@ -71,7 +61,7 @@ char	*ft_strjoin(char const	*s1, char const	*s2)
 // 	char	*join;
 // 	size_t	size1;
 // 	size_t	size2;
-
+//
 // 	size1 = ft_strlen((char *)s1);
 // 	size2 = ft_strlen((char *)s2);
 // 	if (!s1 || !s2 || !(join = malloc(size1 + size2 + 1)))
@@ -93,7 +83,7 @@ char	*ft_strjoin(char const	*s1, char const	*s2)
 // 	size_t	size2;
 // 	int		index1;
 // 	int		index2;
-
+//
 // 	index1 = 0;
 // 	index2 = 0;
 // 	size1 = ft_strlen((char *)s1);

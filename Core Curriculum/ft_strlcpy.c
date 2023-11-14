@@ -6,16 +6,18 @@
 /*   By: aolteanu <aolteanu.student@42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 16:23:07 by aolteanu          #+#    #+#             */
-/*   Updated: 2023/10/26 13:36:17 by aolteanu         ###   ########.fr       */
+/*   Updated: 2023/11/14 21:34:06 by aolteanu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <bsd/string.h>
+// #include <stdio.h>
+// #include <bsd/string.h>
 
 //The strlcpy() function copies up to size - 1 characters from the NUL-ter‐
 //minated string src to dst, NUL-terminating the result.
 // compile it like this "cc -libbsd ft_strlcpy.c"
+
+#include "libft.h"
 
 size_t	ft_strlcpy(char	*dst,	const char	*src, size_t	size)
 {
@@ -26,7 +28,7 @@ size_t	ft_strlcpy(char	*dst,	const char	*src, size_t	size)
 	count = 0;
 	pointer_dst = dst;
 	pointer_src = src;
-	if (pointer_src > 0)
+	if (pointer_src != 0)
 	{
 		while (count < size && pointer_dst[count] != '\0')
 		{

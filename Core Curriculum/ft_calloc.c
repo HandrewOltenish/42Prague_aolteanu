@@ -6,7 +6,7 @@
 /*   By: aolteanu <aolteanu.student@42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 14:19:51 by aolteanu          #+#    #+#             */
-/*   Updated: 2023/11/01 18:30:56 by aolteanu         ###   ########.fr       */
+/*   Updated: 2023/11/14 21:44:47 by aolteanu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,22 +28,10 @@
 // by a successful call to malloc() with a size of zero, or by a suc‐
 //cessful call to calloc() with nmemb or size equal to zero.
 
-#include <stdlib.h>
-#include <stdio.h>
+// #include <stdlib.h>
+// #include <stdio.h>
 
-static void	ft_bzero(void *s, size_t n)
-{
-	unsigned char	*pointer_alpha;
-	size_t			count;
-
-	pointer_alpha = s;
-	count = 0;
-	while (count < n)
-	{
-		pointer_alpha[count] = '\0';
-		count++;
-	}
-}
+#include "libft.h"
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {
@@ -54,7 +42,7 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	else
 	{
 		p = malloc(nmemb * sizeof(char));
-		bzero(p, nmemb * size);
+		ft_bzero(p, (nmemb * size));
 		return (p);
 	}
 }

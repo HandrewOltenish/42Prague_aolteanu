@@ -6,7 +6,7 @@
 /*   By: aolteanu <aolteanu.student@42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 12:57:01 by aolteanu          #+#    #+#             */
-/*   Updated: 2023/10/27 14:29:32 by aolteanu         ###   ########.fr       */
+/*   Updated: 2023/11/14 21:19:52 by aolteanu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@
 //The  terminating null byte is considered part of the string, so that
 //if c is specified as '\0', these functions return a
 //pointer to the terminator.
-#include <string.h>
-#include <stdio.h>
+// #include <string.h>
+// #include <stdio.h>
+
+#include "libft.h"
 
 char	*ft_strchr(const char	*s, int c)
 {

@@ -6,17 +6,19 @@
 /*   By: aolteanu <aolteanu.student@42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 17:41:59 by aolteanu          #+#    #+#             */
-/*   Updated: 2023/10/26 13:13:33 by aolteanu         ###   ########.fr       */
+/*   Updated: 2023/11/14 21:18:15 by aolteanu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <bsd/string.h>
+// #include <stdio.h>
+// #include <bsd/string.h>
 
 //The strlcat() function appends the NUL-terminated string src to the end
 //of dst.  It will append at most size - strlen(dst) - 1 bytes, NUL-termi‐
 //nating the result.
 // compile it like this "cc -lbsd ft_strlcat.c"
+
+#include "libft.h"
 
 size_t	ft_strlcat(char	*dst, const char	*src, size_t	size)
 {

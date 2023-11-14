@@ -6,7 +6,7 @@
 /*   By: aolteanu <aolteanu.student@42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 15:40:27 by aolteanu          #+#    #+#             */
-/*   Updated: 2023/11/13 12:39:29 by aolteanu         ###   ########.fr       */
+/*   Updated: 2023/11/14 21:58:31 by aolteanu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,21 +25,11 @@
 // to create a new string (with malloc(3)) resulting
 // from successive applications of ’f’.
 
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
+// #include <stdio.h>
+// #include <unistd.h>
+// #include <stdlib.h>
 
-static size_t	ft_strlen(const char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i] != '\0')
-	{
-		i++;
-	}
-	return (i);
-}
+#include "libft.h"
 
 char	f(unsigned int index, char character)
 {
@@ -68,15 +58,15 @@ char	*ft_strmapi(char const	*s, char (*f)(unsigned int, char))
 	temp_str[index] = '\0';
 	str = (char *)malloc(sizeof(char) * (index + 1));
 	str = temp_str;
-	if (str == 0);
-		return (NULL);
+	if (str == 0)
+			return (NULL);
 	return (str);
 }
 
 // int	main(void)
 // {
 // 	char	*str;
-
+//
 // 	str = (char *)malloc(4);
 // 	str = "ABC";
 //	printf("Original String: %s\n

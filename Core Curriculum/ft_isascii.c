@@ -6,12 +6,14 @@
 /*   By: aolteanu <aolteanu.student@42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 16:53:37 by aolteanu          #+#    #+#             */
-/*   Updated: 2023/10/16 16:57:52 by aolteanu         ###   ########.fr       */
+/*   Updated: 2023/11/14 21:15:29 by aolteanu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ctype.h>
-#include <stdio.h>
+// #include <ctype.h>
+// #include <stdio.h>
+
+#include "libft.h"
 
 int	ft_isascii(int a)
 {

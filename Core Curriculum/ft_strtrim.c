@@ -6,7 +6,7 @@
 /*   By: aolteanu <aolteanu.student@42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 12:45:18 by aolteanu          #+#    #+#             */
-/*   Updated: 2023/11/14 15:06:53 by aolteanu         ###   ########.fr       */
+/*   Updated: 2023/11/14 21:54:40 by aolteanu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,20 +26,10 @@
 // them to its copy
 // At last, copy the string to the copy.
 
-#include <stdio.h>
-#include <stdlib.h>
+// #include <stdio.h>
+// #include <stdlib.h>
 
-static size_t	ft_strlen(char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i] != '\0')
-	{
-		i++;
-	}
-	return (i);
-}
+#include "libft.h"
 
 static int	ft_charcmp(char	c, const char* set)
 {

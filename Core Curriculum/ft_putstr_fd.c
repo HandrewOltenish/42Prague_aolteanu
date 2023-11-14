@@ -1,42 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aolteanu <aolteanu.student@42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/14 20:28:25 by aolteanu          #+#    #+#             */
-/*   Updated: 2023/11/14 21:17:11 by aolteanu         ###   ########.fr       */
+/*   Created: 2023/11/14 20:47:28 by aolteanu          #+#    #+#             */
+/*   Updated: 2023/11/14 21:17:21 by aolteanu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// Function name ft_putchar_fd
-// Prototype void ft_putchar_fd(char c, int fd);
+// Function name ft_putstr_fd
+// Prototype void ft_putstr_fd(char *s, int fd);
 // Turn in files -
-// Parameters c: The character to output.
+// Parameters s: The string to output.
 // fd: The file descriptor on which to write.
 // Return value None
 // External functs. write
-// Description Outputs the character ’c’ to the given file
+// Description Outputs the string ’s’ to the given file
 // descriptor.
-
-// #include <unistd.h>
-// #include <fcntl.h>
 
 #include "libft.h"
 
-void	ft_putchar_fd(char c, int fd)
+ft_putstr_fd(char *s, int fd)
 {
-	write(fd, &c, 1);
+	int index;
+
+	index = 0;
+	while (s)
+	{
+		write (fd, &s[index], 1);
+		index++;
+	}
 }
 
 // int	main(void)
 // {
-// 	char	c;
 // 	int		fd;
-//
-// 	c = 'c';
-// 	fd = open("/nfs/homes/aolteanu/Common Core/Libft/testfile.txt", O_WRONLY | O_APPEND);
-// 	ft_putchar_fd('c', fd);
-// 	return (0);
+// 	char	*s;
+
+// 	fd = "/nfs/homes/aolteanu/Common Core/Libft/testfile.txt";
+// 	s = "I'm inside your files";
+// 	ft_putstr_fd(s, fd);
 // }

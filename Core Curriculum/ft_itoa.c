@@ -6,7 +6,7 @@
 /*   By: aolteanu <aolteanu.student@42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 15:13:26 by aolteanu          #+#    #+#             */
-/*   Updated: 2023/11/10 18:20:22 by aolteanu         ###   ########.fr       */
+/*   Updated: 2023/11/14 21:45:35 by aolteanu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,11 @@
 
 // !
 
-#include <stdlib.h>
-#include <unistd.h>
-#include <stdio.h>
+// #include <stdlib.h>
+// #include <unistd.h>
+// #include <stdio.h>
+
+#include "libft.h"
 
 static char	*ft_get_string(char *c, int length, int neg, int n)
 {
@@ -81,12 +83,12 @@ char	*ft_itoa(int n)
 	return (ft_get_string(c, length, negativity, n));
 }
 
-int	main(void)
-{
-	char	*c;
-	int		n;
+// int	main(void)
+// {
+// 	char	*c;
+// 	int		n;
 
-	n = -1234;
-	c = ft_itoa(n);
-	printf("Number: %i\nITOA: %s\n", n, c);
-}
+// 	n = -1234;
+// 	c = ft_itoa(n);
+// 	printf("Number: %i\nITOA: %s\n", n, c);
+// }

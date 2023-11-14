@@ -12,15 +12,17 @@
 
 //toupper, tolower - convert letter to upper or lower case
 
-#include <ctype.h>
-#include <stdio.h>
+// #include <ctype.h>
+// #include <stdio.h>
+
+#include "libft.h"
 
 int	ft_tolower(int c)
 {
 	unsigned char	character;
 
 	character = c;
-	if (65 <= c <= 90)
+	if (65 <= c && c <= 90)
 	{
 		character = character + 32;
 	}

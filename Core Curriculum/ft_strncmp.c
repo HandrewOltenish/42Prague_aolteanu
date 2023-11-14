@@ -6,7 +6,7 @@
 /*   By: aolteanu <aolteanu.student@42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 14:30:13 by aolteanu          #+#    #+#             */
-/*   Updated: 2023/11/06 13:28:25 by aolteanu         ###   ########.fr       */
+/*   Updated: 2023/11/14 21:19:36 by aolteanu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,10 @@
 //	bytes thereof) is found, respectively, to be less than,
 //	to match, or be greater than s2.
 
-#include <string.h>
-#include <stdio.h>
+// #include <string.h>
+// #include <stdio.h>
+
+#include "libft.h"
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
@@ -55,12 +57,12 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 		return (0);
 }
 
-int	main(void)
-{
-	printf("Which is bigger?\nLuther\nZeke\nIf s1 > s2 type 1\n");
-	printf("If s1 < s2 type -1\n");
-	printf("If s1 == s2 type 0\n");
-	printf("Let's see the result: %i\n", ft_strncmp("Luther", "Zeke", 5));
-	printf("Let's see the result: %i\n", strncmp("Luther", "Zeke", 5));
-	return (0);
-}
+// int	main(void)
+// {
+// 	printf("Which is bigger?\nLuther\nZeke\nIf s1 > s2 type 1\n");
+// 	printf("If s1 < s2 type -1\n");
+// 	printf("If s1 == s2 type 0\n");
+// 	printf("Let's see the result: %i\n", ft_strncmp("Luther", "Zeke", 5));
+// 	printf("Let's see the result: %i\n", strncmp("Luther", "Zeke", 5));
+// 	return (0);
+// }

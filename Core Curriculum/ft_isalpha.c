@@ -6,12 +6,14 @@
 /*   By: aolteanu <aolteanu.student@42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 11:56:32 by aolteanu          #+#    #+#             */
-/*   Updated: 2023/10/26 13:03:13 by aolteanu         ###   ########.fr       */
+/*   Updated: 2023/11/14 21:15:19 by aolteanu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ctype.h>
-#include <stdio.h>
+// #include <ctype.h>
+// #include <stdio.h>
+
+#include "libft.h"
 
 int	ft_isalpha(int a)
 {

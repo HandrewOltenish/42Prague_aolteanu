@@ -6,7 +6,7 @@
 /*   By: aolteanu <aolteanu.student@42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 17:25:16 by aolteanu          #+#    #+#             */
-/*   Updated: 2023/10/26 12:41:08 by aolteanu         ###   ########.fr       */
+/*   Updated: 2023/11/14 21:17:05 by aolteanu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,11 @@
 		// unsigned char	c;
 		// s[count] = c;
 		// count++;
-#include <string.h>
-#include <stdio.h>
-#include <unistd.h>
+// #include <string.h>
+// #include <stdio.h>
+// #include <unistd.h>
+
+#include "libft.h"
 
 void	*ft_memset(void *s, int c, size_t p)
 {

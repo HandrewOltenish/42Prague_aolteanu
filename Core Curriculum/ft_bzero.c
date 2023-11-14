@@ -6,7 +6,7 @@
 /*   By: aolteanu <aolteanu.student@42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 14:57:29 by aolteanu          #+#    #+#             */
-/*   Updated: 2023/11/01 18:18:02 by aolteanu         ###   ########.fr       */
+/*   Updated: 2023/11/14 21:15:02 by aolteanu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 //	starting at the location pointed to by s, by writing zeros (bytes
 //	containing '\0') to that area.
 
-#include <stdio.h>
-#include <strings.h>
-#include <unistd.h>
+// #include <stdio.h>
+// #include <strings.h>
+// #include <unistd.h>
+
+#include "libft.h"
 
 void	ft_bzero(void *s, size_t n)
 {

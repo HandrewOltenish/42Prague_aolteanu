@@ -6,7 +6,7 @@
 /*   By: aolteanu <aolteanu.student@42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 12:59:45 by aolteanu          #+#    #+#             */
-/*   Updated: 2023/11/03 17:55:03 by aolteanu         ###   ########.fr       */
+/*   Updated: 2023/11/14 21:20:15 by aolteanu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@
 // maximum size ’len’.
 
 //check malloc
-#include <stdlib.h>
-#include <stdio.h>
+// #include <stdlib.h>
+// #include <stdio.h>
+
+#include "libft.h"
 
 char	*ft_substr(char const	*s, unsigned int start, size_t	len)
 {
@@ -45,9 +47,9 @@ char	*ft_substr(char const	*s, unsigned int start, size_t	len)
 // {
 // 	char const	*s = "Ramboo";
 // 	char *result = ft_substr(s, 2, 4);
-
+//
 // 	printf("%s\n%s\n", s, result);
 // 	free(result);
-	
+//	
 // 	return (0);
 // }
