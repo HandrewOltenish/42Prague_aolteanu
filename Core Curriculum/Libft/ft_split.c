@@ -6,7 +6,7 @@
 /*   By: aolteanu <aolteanu.student@42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 15:07:28 by aolteanu          #+#    #+#             */
-/*   Updated: 2023/12/08 19:32:34 by aolteanu         ###   ########.fr       */
+/*   Updated: 2023/12/09 22:20:23 by aolteanu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,18 +43,6 @@ size_t	ft_strlcpy(char	*dst,	const char	*src, size_t	size)
 	}
 	dst[i] = '\0';
 	return (count);
-}
-
-size_t	ft_strlen(const char *s)
-{
-	size_t	i;
-
-	i = 0;
-	while (s[i] != '\0')
-	{
-		i++;
-	}
-	return (i);
 }
 
 int	ft_countwords(const char *s, char d)

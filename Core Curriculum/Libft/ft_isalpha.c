@@ -6,7 +6,7 @@
 /*   By: aolteanu <aolteanu.student@42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 11:56:32 by aolteanu          #+#    #+#             */
-/*   Updated: 2023/11/14 21:15:19 by aolteanu         ###   ########.fr       */
+/*   Updated: 2023/12/09 20:32:14 by aolteanu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,3 @@ int	ft_isalpha(int a)
 	else
 		return (0);
 }
-
-// int main()
-// {
-//     int a = '7';
-//     printf("Your alphabetical character,sir: %d \n", (ft_isalpha(a)));
-//     return 0;
-// }

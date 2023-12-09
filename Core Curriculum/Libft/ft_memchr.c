@@ -6,7 +6,7 @@
 /*   By: aolteanu <aolteanu.student@42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 15:31:06 by aolteanu          #+#    #+#             */
-/*   Updated: 2023/12/06 16:36:27 by aolteanu         ###   ########.fr       */
+/*   Updated: 2023/12/09 22:06:54 by aolteanu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,26 +21,42 @@
 #include <string.h>
 #include <stdio.h>
 
+// void	*ft_memchr(const void *s, int c, size_t n)
+// {
+// 	const unsigned char	*pointer_s;
+// 	unsigned char		instance_c;
+// 	int					byte_n;
+
+// 	pointer_s = s;
+// 	instance_c = c;
+// 	byte_n = n;
+// 	if (!s || !c || !n)
+// 		return (NULL);
+// 	while (byte_n > 0)
+// 	{
+// 		if (*pointer_s != instance_c)
+// 		{
+// 			pointer_s++;
+// 			byte_n--;
+// 		}
+// 		else if (*pointer_s == instance_c)
+// 			return ((void *)pointer_s);
+// 	}
+// 	return (NULL);
+// }
+
 void	*ft_memchr(const void *s, int c, size_t n)
 {
-	const unsigned char	*pointer_s;
-	unsigned char		instance_c;
-	int					byte_n;
+	size_t			i;
+	unsigned char	*str;
 
-	pointer_s = s;
-	instance_c = c;
-	byte_n = n;
-	if (!s || !c || !n)
-		return (NULL);
-	while (byte_n > 0)
+	i = 0;
+	str = (unsigned char *)s;
+	while (n > i)
 	{
-		if (*pointer_s != instance_c)
-		{
-			pointer_s++;
-			byte_n--;
-		}
-		else if (*pointer_s == instance_c)
-			return ((void *)pointer_s);
+		if (str[i] == (unsigned char)c)
+			return (&str[i]);
+		i++;
 	}
 	return (NULL);
 }

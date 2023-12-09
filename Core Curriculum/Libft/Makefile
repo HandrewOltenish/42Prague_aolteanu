@@ -10,7 +10,7 @@ BONUS = ft_lstnew.c ft_lstdelone.c ft_lstclear.c ft_lstadd_front.c ft_lstadd_bac
 	ft_lstsize.c ft_lstiter.c ft_lstmap.c ft_lstlast.c
 
 OBJS = ${SRCS:.c=.o}
-BNS = $(BONUS:.c=.o}
+BNS = ${BONUS:.c=.o}
 NAME = libft.a
 LIBC = ar rcs
 # INC  = libft.h
@@ -23,14 +23,17 @@ CFLAGS = -Wall -Wextra -Werror
 	
 ${NAME}: ${OBJS}
 	${LIBC} ${NAME} ${OBJS}
-	
+
 all: ${NAME}
 
+bonus: ${OBJS} ${BNS}
+	${LIBC} ${NAME} ${OBJS} ${BNS}
+
 clean:
-	${RM} ${OBJS}
+	${RM} ${OBJS} ${BNS}
 	
 fclean: clean
-	${RM} ${NAME} 
+	${RM} ${NAME} ${BNS}
 	
 re: fclean all
 

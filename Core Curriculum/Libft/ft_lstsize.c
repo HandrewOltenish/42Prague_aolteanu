@@ -6,7 +6,7 @@
 /*   By: aolteanu <aolteanu.student@42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 21:27:33 by aolteanu          #+#    #+#             */
-/*   Updated: 2023/12/08 21:38:44 by aolteanu         ###   ########.fr       */
+/*   Updated: 2023/12/09 20:47:03 by aolteanu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,17 @@
 #include <stdlib.h> 
 #include <stdio.h>
 
-t_list	*ft_lstnewone(void *content)
+int	ft_lstsize(t_list *lst)
 {
-	t_list	*elem;
+	t_list		*tmp;
+	int			i;
 
-	elem = (t_list *)malloc(sizeof(t_list));
-	if (!elem)
-		return (NULL);
-	if (!content)
-		elem->content = NULL;
-	else
-		elem->content = content;
-	elem->next = NULL;
-	return (elem);
+	tmp = lst;
+	i = 0;
+	while (tmp)
+	{
+		tmp = tmp->next;
+		i++;
+	}
+	return (i);
 }

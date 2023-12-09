@@ -6,7 +6,7 @@
 /*   By: aolteanu <aolteanu.student@42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 21:15:35 by aolteanu          #+#    #+#             */
-/*   Updated: 2023/12/08 21:37:49 by aolteanu         ###   ########.fr       */
+/*   Updated: 2023/12/09 20:41:21 by aolteanu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,12 @@
 
 t_list	*ft_lstnew(void *content)
 {
-	t_list	*new;
+	t_list	*elem;
 
-	new = malloc(sizeof(t_list));
-	if (new == NULL)
-	{
+	elem = malloc(sizeof(t_list));
+	if (!elem)
 		return (NULL);
-	}
-	new->content = content;
-	new->next = NULL;
-	return (new);
+	elem->content = content;
+	elem->next = NULL;
+	return (elem);
 }
