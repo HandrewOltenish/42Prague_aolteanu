@@ -1,0 +1,51 @@
+New Knowledge needed: linked lists + variadic functions
+Linked lists are objects connected through nodes. They can be single-linked, doubly-linked and doubly-circular-linked. For this project you'll need only single-linked lists.
+A linked list has a head, body, and tail. It looks like this:
+
+struct typedef linked_list_head;
+{
+	type variable;
+	pointer *next_node;
+}
+
+I. Make your printf detect variable arguments
+	1. va_list - this is where we store arguments
+	2. va_start - signal to start argument
+	3. va_end - signal to end argument.
+
+II Handle format types inside ft_printf (%d, etc.)
+	- In the ft_printf string put a condition to find "%" character. If found, start a while loop, finding the following:
+		• %c Prints a single character.
+		• %s Prints a string (as defined by the common C convention).
+		• %p The void * pointer argument has to be printed in hexadecimal format.
+		• %d Prints a decimal (base 10) number.
+		• %i Prints an integer in base 10.
+		• %u Prints an unsigned decimal (base 10) number.
+		• %x Prints a number in hexadecimal (base 16) lowercase format.
+		• %X Prints a number in hexadecimal (base 16) uppercase format.
+		• %% Prints a percent sign.
+			- Handle error cases if formatting character not found. ("Incomplete format specifier")
+			
+Examples:
+
+
+int ft_printf(char*, ...)
+va_list string;
+va_list integer;
+
+va_start(string, char*);
+
+subfunction
+{
+	...va_args(string);
+}
+va_end(string);
+va_start (integer, int);
+
+subfunction2
+{
+	...
+}
+
+int main(
+
