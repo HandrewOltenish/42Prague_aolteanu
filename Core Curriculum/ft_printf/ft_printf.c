@@ -6,7 +6,7 @@
 /*   By: aolteanu <aolteanu.student@42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 16:09:53 by aolteanu          #+#    #+#             */
-/*   Updated: 2024/03/09 16:49:44 by aolteanu         ###   ########.fr       */
+/*   Updated: 2024/03/10 19:56:39 by aolteanu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,62 +47,67 @@
 //               used only for negative numbers.  A + overrides a space if
 //               both are used.
 
-#include <stdio.h>
-#include <stdarg.h>
-#include <stdlib.h>
 #include "ft_printf.h"
 
-ft_checkformat(char format va_list arg)
-{
-	if (format == 'c')
-		//return another function like putchar_len
-	if (format == 's')
-		//return function
-	if (format == 'p')
-	if (format == 'd')
-	if (format == 'i')
-	if (format == 'u')
-	if (format == 'x')
-	if (format == 'X')
+// int ft_checkformat(char format, va_list arg)
+// {
+// 	if (format == 'c')
+// 		return (ft_charlen(va_arg(arg, int))); // try with char instead of int later
+// 	if (format == 's')
+// 		return (ft_strlen(va_arg(arg, char	*)));
+// 	if (format == 'p')
+// 		return (ft_plen(va_arg(arg, void *)));
+// 	if (format == 'd')
+// 		return (ft_dlen(va_arg(arg, int)));
+// 	if (format == 'i')
+// 		return (ft_dlen(va_arg(arg, int))); // return length of integer in base 10. Maybe same function, dlen.
+// 	if (format == 'u')
+// 		return (ft_ulen(va_arg(arg, unsigned int)));
+	// if (format == 'x')
+	// 	return (ft_xlen(va_arg(arg, int)));
+	// if (format == 'X')
+	// 	return (ft_Xlen(va_arg(arg, int)));
+	if (format == '%')
 	if (format == '#')
 	if (format == ' ')
-}
+// 	return (0);
+// }
 
-int ft_printf (const char *str, ...)
-{
-	const char *s;
-	int i;
-	va_list arg;
-	va_start(arg, str);
-	s = va_arg(arg, const char *);
-	if (!s)
-		return (0);
-	while (s)
-	{
-		if (s[i] == '%')
-			i += ft_checkformat(s[i++])
-		i++;
-	}
-	return (0);
-	int check = ft_printf();
-	int check_1 = printf();
-}
+// int ft_printf (const char *str, ...)
+// {
+// 	const char *s;
+// 	int i;
+// 	va_list arg;
+// 	va_start(arg, str);
+// 	s = va_arg(arg, const char *);
+// 	if (!s)
+// 		return (0);
+// 	while (s)
+// 	{
+// 		if (s[i] == '%')
+// 			i = ft_checkformat(s[i++], arg);
+// 		i++;
+// 	}
+// 	return (0);
+// 	int check = ft_printf("Integer %i", 1);
+// 	int check_1 = printf("Integer %i", 1);
+// }
 
 // Linked list exercises
-// ---------------------------------------------- RECAP OF LONKED LISTS ---------------------------------------------------------
+// ---------------------------------------------- RECAP OF LINKED LISTS ---------------------------------------------------------
 //lstnew Allocates (with malloc(3)) and returns a new node.
 // The member variable ’content’ is initialized with
 // the value of the parameter ’content’. The variable
 // ’next’ is initialized to NULL.
 
 // Main Program for testing variadic functions
-int main(void)
-{
-	printf("Here comes the Sum: %d\n", sum(10, 1));
-	return (0);
-}
+// int main(void)
+// {
+// 	printf("Here comes the Sum: %d\n", sum(10, 1));
+// 	return (0);
+// }
 
-Main program for printf testing
+// Main program for printf testing
 int main()
 {
    printf ("Characters: %c %c \n", 'a', 65);
