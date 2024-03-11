@@ -6,7 +6,7 @@
 /*   By: aolteanu <aolteanu.student@42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 16:09:53 by aolteanu          #+#    #+#             */
-/*   Updated: 2024/03/10 19:56:39 by aolteanu         ###   ########.fr       */
+/*   Updated: 2024/03/11 17:13:17 by aolteanu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 // Bonus list:
 // • Manage any combination of the following flags: ’-0.’ and the field minimum width
 // under all conversions.
+// -	Left-justify within the given field width; Right justification is the default (see width sub-specifier).
 // -- My Notes: 0      The value should be zero padded.  For d, i, o, u, x, X, a,
 //               A, e, E, f, F, g, and G conversions, the converted value
 //               is padded on the left with zeros rather than blanks.  If
@@ -43,35 +44,64 @@
 // • Manage all the following flags: ’# +’ (Yes, one of them is a space)
 // -- My Notes: #      The value should be converted to an "alternate form".  For
 //               o conversions, the first character of the output string is
-//               made zero (by prefixing a 0 ifimproving programming logicn.  By default, a sign is
+//               made zero (by prefixing a 0 ifimproving programming logic.  By default, a sign is
 //               used only for negative numbers.  A + overrides a space if
 //               both are used.
-
+// ' ' (space)	If no sign is going to be written, a blank space is inserted before the value.
 #include "ft_printf.h"
 
-// int ft_checkformat(char format, va_list arg)
-// {
-// 	if (format == 'c')
-// 		return (ft_charlen(va_arg(arg, int))); // try with char instead of int later
-// 	if (format == 's')
-// 		return (ft_strlen(va_arg(arg, char	*)));
-// 	if (format == 'p')
-// 		return (ft_plen(va_arg(arg, void *)));
-// 	if (format == 'd')
-// 		return (ft_dlen(va_arg(arg, int)));
-// 	if (format == 'i')
-// 		return (ft_dlen(va_arg(arg, int))); // return length of integer in base 10. Maybe same function, dlen.
-// 	if (format == 'u')
-// 		return (ft_ulen(va_arg(arg, unsigned int)));
-	// if (format == 'x')
-	// 	return (ft_xlen(va_arg(arg, int)));
-	// if (format == 'X')
-	// 	return (ft_Xlen(va_arg(arg, int)));
+int ft_checkformat(char format, va_list arg)
+{
+// try with char instead of int later for ft_charlen
+	if (format == 'c')
+		return (ft_charlen(va_arg(arg, int))); 
+	if (format == 's')
+		return (ft_strlen(va_arg(arg, char	*)));
+	if (format == 'p')
+		return (ft_plen(va_arg(arg, void *)));
+	if (format == 'd')
+		return (ft_dlen(va_arg(arg, int)));
+// return length of integer in base 10. Maybe same function, dlen.
+	if (format == 'i')
+		return (ft_dlen(va_arg(arg, int))); 
+	if (format == 'u')
+		return (ft_ulen(va_arg(arg, unsigned int)));
+	if (format == 'x')
+		return (ft_xlen(va_arg(arg, int)));
+	if (format == 'X')
+		return (ft_Xlen(va_arg(arg, int)));
 	if (format == '%')
+      return (ft_pcentlen(va_arg(arg, int)));
+   // bonus
+   if (format == '0')
+   {
+      if (format++ == '-')
+      {
+         write(1, "flag '0' is ignored when flag '-' is present", 50);
+         return (1);        
+      }
+      else return (ft_zerolen(va_arg(arg, int)));
+   }
+   if (format == '-')
+   {
+      if (format++ == '0')
+      {
+         write(1, "flag '0' is ignored when flag '-' is present", 50);
+         return (1);        
+      }
+      else return (ft_dashlen(va_arg(arg, int)));
+   }
+   // Return xlen / Xlen + 2 from the 0x and 0X characters prefixed to them;
 	if (format == '#')
+   {
+      if (format++ == 'x' && va_arg(arg, int) != 0)
+         return (ft_xlen(va_arg(arg, int) + 2));
+      else if (format++ == 'X' && va_arg(arg, int) != 0)
+         return (ft_Xlen(va_arg(arg, int) + 2));
+   }
 	if (format == ' ')
-// 	return (0);
-// }
+	return (0);
+}
 
 // int ft_printf (const char *str, ...)
 // {
@@ -111,7 +141,11 @@
 int main()
 {
    printf ("Characters: %c %c \n", 'a', 65);
-   printf ("Character error: %", "String");
+//   printf ("Character error: %", "String");
+   printf("Normal alignment: %d\n", 10);
+   printf("Left-aligned adjustment: %-10d, %d, %d\n", 10, 11, 12);
+   printf("Zero-padded value: %03d\n", 10);
+   printf("Zero-padded value with 0- flags: %0-3d\n", 10);
    printf ("Decimals: %d %ld\n", 1977, 650000L);
    printf ("Preceding with blanks: %10d \n", 1977);
    printf ("Preceding with zeros: %010d \n", 1977);
