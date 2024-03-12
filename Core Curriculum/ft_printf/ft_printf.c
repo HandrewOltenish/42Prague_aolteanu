@@ -6,7 +6,7 @@
 /*   By: aolteanu <aolteanu.student@42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 16:09:53 by aolteanu          #+#    #+#             */
-/*   Updated: 2024/03/11 17:13:17 by aolteanu         ###   ########.fr       */
+/*   Updated: 2024/03/12 23:46:32 by aolteanu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,9 @@ int ft_checkformat(char format, va_list arg)
 		return (ft_strlen(va_arg(arg, char	*)));
 	if (format == 'p')
 		return (ft_plen(va_arg(arg, void *)));
-	if (format == 'd')
-		return (ft_dlen(va_arg(arg, int)));
-// return length of integer in base 10. Maybe same function, dlen.
-	if (format == 'i')
-		return (ft_dlen(va_arg(arg, int))); 
+// return length of integer in base 10. Maybe same function, dlen.	
+   if (format == 'd' || format == 'i')
+		return (ft_dorilen(va_arg(arg, int)));
 	if (format == 'u')
 		return (ft_ulen(va_arg(arg, unsigned int)));
 	if (format == 'x')
@@ -77,7 +75,7 @@ int ft_checkformat(char format, va_list arg)
    {
       if (format++ == '-')
       {
-         write(1, "flag '0' is ignored when flag '-' is present", 50);
+         write(1, "flag '0' is ignored when flag '-' is present", 45);
          return (1);        
       }
       else return (ft_zerolen(va_arg(arg, int)));
@@ -86,7 +84,7 @@ int ft_checkformat(char format, va_list arg)
    {
       if (format++ == '0')
       {
-         write(1, "flag '0' is ignored when flag '-' is present", 50);
+         write(1, "flag '0' is ignored when flag '-' is present", 45);
          return (1);        
       }
       else return (ft_dashlen(va_arg(arg, int)));
@@ -103,25 +101,26 @@ int ft_checkformat(char format, va_list arg)
 	return (0);
 }
 
-// int ft_printf (const char *str, ...)
-// {
-// 	const char *s;
-// 	int i;
-// 	va_list arg;
-// 	va_start(arg, str);
-// 	s = va_arg(arg, const char *);
-// 	if (!s)
-// 		return (0);
-// 	while (s)
-// 	{
-// 		if (s[i] == '%')
-// 			i = ft_checkformat(s[i++], arg);
-// 		i++;
-// 	}
-// 	return (0);
-// 	int check = ft_printf("Integer %i", 1);
-// 	int check_1 = printf("Integer %i", 1);
-// }
+int ft_printf (const char *str, ...)
+{
+	const char *s;
+	int i;
+
+	va_list arg;
+	va_start(arg, str);
+	s = va_arg(arg, const char *);
+	if (!s)
+		return (0);
+	while (s)
+	{
+		if (s[i] == '%')
+			i = ft_checkformat(s[i++], arg);
+		i++;
+	}
+	return (0);
+	int check = ft_printf("Integer %i", 1);
+	int check_1 = printf("Integer %i", 1);
+}
 
 // Linked list exercises
 // ---------------------------------------------- RECAP OF LINKED LISTS ---------------------------------------------------------
@@ -138,20 +137,3 @@ int ft_checkformat(char format, va_list arg)
 // }
 
 // Main program for printf testing
-int main()
-{
-   printf ("Characters: %c %c \n", 'a', 65);
-//   printf ("Character error: %", "String");
-   printf("Normal alignment: %d\n", 10);
-   printf("Left-aligned adjustment: %-10d, %d, %d\n", 10, 11, 12);
-   printf("Zero-padded value: %03d\n", 10);
-   printf("Zero-padded value with 0- flags: %0-3d\n", 10);
-   printf ("Decimals: %d %ld\n", 1977, 650000L);
-   printf ("Preceding with blanks: %10d \n", 1977);
-   printf ("Preceding with zeros: %010d \n", 1977);
-   printf ("Some different radices: %d %x %o %#x %#o \n", 100, 100, 100, 100, 100);
-   printf ("floats: %4.2f %+.0e %E \n", 3.1416, 3.1416, 3.1416);
-   printf ("Width trick: %*d \n", 5, 10);
-   printf ("%s \n", "A string");
-   return 0;
-}

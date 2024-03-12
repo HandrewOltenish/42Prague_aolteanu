@@ -6,87 +6,34 @@
 /*   By: aolteanu <aolteanu.student@42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 19:35:48 by aolteanu          #+#    #+#             */
-/*   Updated: 2024/03/11 17:13:15 by aolteanu         ###   ########.fr       */
+/*   Updated: 2024/03/12 23:46:29 by aolteanu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-// ------------------------FORMAT HANDLING FUNCTIONS------------------------
-void ft_handlechar(int number)
+// -----------------------------LENTGTH FUNCTIONS-----------------------------
+// ft_charlen returns the length of a char
+int ft_charlen(int number)
 {
+	int i;
 	char c;
 
 	c = number;
 	write (1, &c, 1);
-}
-
-void ft_handleformat(char format, va_list arg)
-{
-	if (format == 'c')
-		ft_handlechar(va_arg(arg, int));
-	if (format == 's')
-		ft_handlestr(va_arg(arg, char	*));
-	if (format == 'p')
-		return (ft_handlep(va_arg(arg, void *)));
-	if (format == 'd')
-		ft_handled(va_arg(arg, int));
-// return length of integer in base 10. Maybe same function, dlen.
-	if (format == 'i')
-		ft_handled(va_arg(arg, int));
-	if (format == 'u')
-		ft_handleu(va_arg(arg, unsigned int));
-	if (format == 'x')
-		ft_handlex(va_arg(arg, int));
-	if (format == 'X')
-		return (ft_Xlen(va_arg(arg, int)));
-	if (format == '%')
-      return (ft_pcentlen(va_arg(arg, int)));
-   // bonus
-   if (format == '0')
-   {
-      if (format++ == '-')
-      {
-         write(1, "flag '0' is ignored when flag '-' is present", 50);
-         return (1);        
-      }
-      else return (ft_zerolen(va_arg(arg, int)));
-   }
-   if (format == '-')
-   {
-      if (format++ == '0')
-      {
-         write(1, "flag '0' is ignored when flag '-' is present", 50);
-         return (1);        
-      }
-      else return (ft_dashlen(va_arg(arg, int)));
-   }
-   // Return xlen / Xlen + 2 from the 0x and 0X characters prefixed to them;
-	if (format == '#')
-   {
-      if (format++ == 'x' && va_arg(arg, int) != 0)
-         return (ft_xlen(va_arg(arg, int) + 2));
-      else if (format++ == 'X' && va_arg(arg, int) != 0)
-         return (ft_Xlen(va_arg(arg, int) + 2));
-   }
-	if (format == ' ')
-	return (0);
-}
-// -----------------------------LENTGTH FUNCTIONS-----------------------------
-// ft_charlen returns the length of a char
-int ft_clen(int number)
-{
-	int i;
 	return (i = 1);
 }
 // ft_strlen returns the length of a string
-int ft_slen(char	*str)
+int ft_strlen(char	*str)
 {
 	int i;
 
 	i = 0;
 	while (str[i])
+	{
+		write (1, &str[i], 1);
 		i++;
+	}
 	return (i);
 }
 // ft_plen returns the length of a pointer
@@ -96,26 +43,40 @@ int ft_plen(void *p)
 
 	i = 0;
 	while ((char *)p++)
+	{
+		write (1, &p, 1);
 		i++;
+	}
 	return (i);
 }
 // ft_dlen returns length of a base 10 integer
-int ft_dlen(int number)
+int ft_dorilen(int number)
 {
 	int i;
 
 	i = 0;
 	if (number == 0)
-		return (i);
-	while (number)
 	{
-		if (number < 0)
-		{
-			number = number * (-1);
-			i++;
-		}
-		number = number / 10;
+		write (1, '0', 1);
+		return (i);
+	}
+	if (number < 0)
+	{
+		if (number == -2147483648)
+			return(ft_strlen("-2147483648"));
+		number = number * (-1);
+		write (1, '-', 1);
 		i++;
+	}
+	if (number < 10)
+	{
+		write (1, number + '0', 1);
+		i++;
+	}
+	else
+	{
+		ft_dorilen(number / 10);
+		ft_dorilen(number % 10);
 	}
 	return (i);
 }
@@ -127,10 +88,15 @@ int ft_ulen(unsigned int number)
 	i = 0;
 	if (number == 0)
 		return (i);
-	while (number)
+	if (number < 10)
 	{
-		number = number / 10;
+		write (1, number + '0', 1);
 		i++;
+	}
+	else
+	{
+		ft_ulen(number / 10);
+		ft_ulen(number % 10);
 	}
 	return (i);
 }
@@ -140,10 +106,13 @@ int ft_xlen(int number)
 	int i;
 	char	*s;
 
-	s = (char *)number;
+	s = "abcdef";
 	i = 0;
-	while (s[i])
-		i++;
+	if (number == 0)
+	{
+		write(1, '0', 1);
+		return (i++);
+	}
 	return (i);
 }
 // ft_Xlen returns length of number in base 16 uppercase
