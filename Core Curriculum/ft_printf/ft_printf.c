@@ -6,7 +6,7 @@
 /*   By: aolteanu <aolteanu.student@42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 16:09:53 by aolteanu          #+#    #+#             */
-/*   Updated: 2024/03/12 23:46:32 by aolteanu         ###   ########.fr       */
+/*   Updated: 2024/03/13 20:43:17 by aolteanu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,19 +121,3 @@ int ft_printf (const char *str, ...)
 	int check = ft_printf("Integer %i", 1);
 	int check_1 = printf("Integer %i", 1);
 }
-
-// Linked list exercises
-// ---------------------------------------------- RECAP OF LINKED LISTS ---------------------------------------------------------
-//lstnew Allocates (with malloc(3)) and returns a new node.
-// The member variable ’content’ is initialized with
-// the value of the parameter ’content’. The variable
-// ’next’ is initialized to NULL.
-
-// Main Program for testing variadic functions
-// int main(void)
-// {
-// 	printf("Here comes the Sum: %d\n", sum(10, 1));
-// 	return (0);
-// }
-
-// Main program for printf testing

@@ -6,7 +6,7 @@
 /*   By: aolteanu <aolteanu.student@42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 19:35:48 by aolteanu          #+#    #+#             */
-/*   Updated: 2024/03/12 23:46:29 by aolteanu         ###   ########.fr       */
+/*   Updated: 2024/03/13 20:43:33 by aolteanu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,46 +103,63 @@ int ft_ulen(unsigned int number)
 // ft_xlen returns length of number in base 16 lowercase
 int ft_xlen(int number)
 {
-	int i;
+	int 	i;
+	int 	j;
 	char	*s;
+	char	*str;
 
-	s = "abcdef";
+	s = "0123456789abcdef";
 	i = 0;
-	if (number == 0)
+	while (number > 0)
 	{
-		write(1, '0', 1);
-		return (i++);
+		str[i] = s[(number % 16) * 16];
+		number /= 16;
+		i++;
 	}
-	return (i);
+	j = i;
+	while (i > -1)
+	{
+		write (1, &s[i], 1);
+		i--;
+	}
+	return (j);
 }
 // ft_Xlen returns length of number in base 16 uppercase
 int ft_Xlen(int number)
 {
-	int i;
+int 	i;
+	int 	j;
 	char	*s;
+	char	*str;
 
-	s = (char *)number;
+	s = "0123456789ABCDEF";
 	i = 0;
-	while (s[i])
+	while (number > 0)
+	{
+		str[i] = s[(number % 16) * 16];
+		number /= 16;
 		i++;
-	return (i);
+	}
+	j = i;
+	while (i > -1)
+	{
+		write (1, &s[i], 1);
+		i--;
+	}
+	return (j);
 }
-// ft_pcentlen returns lengrh of number in base 16 uppercase ( can be the same as ft_clen)
+// ft_pcentlen returns lengrh of percent character (can be the same as ft_charlen)
 int ft_pcentlen(int number)
 {
 	int i;
+
+	write (1, '%', 1);
 	return (i = 1);
 }
 // ft_zerolen returns length of number padded with n number of zeroes to the left
 int ft_zerolen(int number)
 {
-	int i;
-	char	*s;
-
-	s = (char *)number;
-	i = 0;
-	while (s[i])
-		i++;
+	
 	return (i);
 }
 // ft_dashlen left-side justifies decimal with n number of spaces
