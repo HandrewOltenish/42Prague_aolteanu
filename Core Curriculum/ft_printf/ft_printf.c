@@ -6,7 +6,7 @@
 /*   By: aolteanu <aolteanu.student@42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 16:09:53 by aolteanu          #+#    #+#             */
-/*   Updated: 2024/03/13 20:43:17 by aolteanu         ###   ########.fr       */
+/*   Updated: 2024/03/18 17:18:26 by aolteanu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,17 +87,24 @@ int ft_checkformat(char format, va_list arg)
          write(1, "flag '0' is ignored when flag '-' is present", 45);
          return (1);        
       }
-      else return (ft_dashlen(va_arg(arg, int)));
+	  while (format >= '0' && format <= '9')
+	  	format++;
+      else
+	  	return (ft_dashlen(va_arg(arg, int), format++));
    }
    // Return xlen / Xlen + 2 from the 0x and 0X characters prefixed to them;
 	if (format == '#')
-   {
-      if (format++ == 'x' && va_arg(arg, int) != 0)
-         return (ft_xlen(va_arg(arg, int) + 2));
-      else if (format++ == 'X' && va_arg(arg, int) != 0)
-         return (ft_Xlen(va_arg(arg, int) + 2));
-   }
+		return (ft_hashlen(va_arg(arg, int), format++));
 	if (format == ' ')
+	{	
+		if (va_arg(arg, int) < 0)
+			return (ft_dorilen(va_arg(arg, int)));
+		else if (va_arg(arg, int) >= 0)
+		{
+			ft_putchar(' ', 1);
+			return (ft_dorilen(va_arg(arg, int)), format++);
+		}
+	}
 	return (0);
 }
 

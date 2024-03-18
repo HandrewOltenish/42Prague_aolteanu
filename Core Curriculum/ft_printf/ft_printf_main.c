@@ -6,7 +6,7 @@
 /*   By: aolteanu <aolteanu.student@42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 21:48:12 by aolteanu          #+#    #+#             */
-/*   Updated: 2024/03/13 20:43:00 by aolteanu         ###   ########.fr       */
+/*   Updated: 2024/03/18 17:01:31 by aolteanu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 int main()
 {
-   printf ("Characters: %c %c \n", 'a', 65);
+   printf("Characters: %c %c \n", 'a', 65);
+   // ft_printf("Characters: %c %c \n", 'a', 65);
+   printf("Handling space format% d\n", 10);
 //   printf ("Character error: %", "String");
-//   printf("Normal alignment of decimal: %d\n", 1.234);
+  printf("Normal alignment of decimal: %f\n", 1.234);
    printf("Handling . format %.12f\n", 123456.123456789012345);
    printf("Handling 0 format %012f\n", 123456.123456789012345);
    printf("Left-aligned adjustment of decimal: %-10d, %d, %d\n", 10, 11, 12);
@@ -29,5 +31,5 @@ int main()
    printf ("floats: %4.2f %+.0e %E \n", 3.1416, 3.1416, 3.1416);
    printf ("Width trick: %*d \n", 5, 10);
    printf ("%s \n", "A string");
-   return 0;
+   return (0);
 }

@@ -6,13 +6,78 @@
 /*   By: aolteanu <aolteanu.student@42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 19:35:48 by aolteanu          #+#    #+#             */
-/*   Updated: 2024/03/13 20:43:33 by aolteanu         ###   ########.fr       */
+/*   Updated: 2024/03/18 16:55:51 by aolteanu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
 // -----------------------------LENTGTH FUNCTIONS-----------------------------
+// ft_putchar writes the character c in the specified file descriptor fd
+static int	ft_numlength(int n)
+{
+	int	count;
+
+	count = 0;
+	if (n < 0)
+	{
+		n = n * (-1);
+		count++;
+	}
+	if (n == 0)
+		return (count = 1);
+	while (n != 0)
+	{
+		n = n / 10;
+		count++;
+	}
+	return (count);
+}
+// ------------------------ITOA------------------------
+char	*ft_itoa(int n)
+{
+	char	*string;
+	long	number;
+	int		index;
+
+	string = 0;
+	number = n;
+	index = ft_numlength(n) - 1;
+	string = (char *)malloc(sizeof(char) * (ft_numlength(n) + 1));
+	if (string == 0)
+		return (NULL);
+	if (n == -2147483648)
+		number = 2147483648;
+	else if (number < 0)
+		number = number * (-1);
+	string[ft_numlength(n)] = '\0';
+	while (index >= 0)
+	{
+		string[index] = (number % 10) + '0';
+		number = number / 10;
+		index--;
+	}
+	if (n < 0)
+		string[0] = '-';
+	return (string);
+}
+// ------------------------ITOA------------------------
+void ft_putchar(char c, int fd)
+{
+	write (1, &c, 1);
+}
+void	ft_putstr(char *s, int fd)
+{
+	int	index;
+
+	index = 0;
+	while (s[index] != '\0')
+	{
+		write (fd, &s[index], 1);
+		index++;
+	}
+}
+
 // ft_charlen returns the length of a char
 int ft_charlen(int number)
 {
@@ -57,20 +122,20 @@ int ft_dorilen(int number)
 	i = 0;
 	if (number == 0)
 	{
-		write (1, '0', 1);
-		return (i);
+		write (1, &i, 1);
+		return (i++);
 	}
 	if (number < 0)
 	{
 		if (number == -2147483648)
 			return(ft_strlen("-2147483648"));
 		number = number * (-1);
-		write (1, '-', 1);
+		ft_putchar('-', 1);
 		i++;
 	}
 	if (number < 10)
 	{
-		write (1, number + '0', 1);
+		ft_putchar(number, 1);
 		i++;
 	}
 	else
@@ -134,6 +199,8 @@ int 	i;
 
 	s = "0123456789ABCDEF";
 	i = 0;
+	if (number == 0)
+		return (i++);
 	while (number > 0)
 	{
 		str[i] = s[(number % 16) * 16];
@@ -153,32 +220,57 @@ int ft_pcentlen(int number)
 {
 	int i;
 
-	write (1, '%', 1);
-	return (i = 1);
+	i = 0;
+	ft_putchar('%', 1);
+	return (i++);
 }
 // ft_zerolen returns length of number padded with n number of zeroes to the left
 int ft_zerolen(int number)
 {
+	int i;
+	
+	i = 0;
 	
 	return (i);
 }
 // ft_dashlen left-side justifies decimal with n number of spaces
-int ft_dashlen(int number)
+int ft_dashlen(int number, int n)
 {
 	int i;
 	char	*s;
 
-	s = (char *)number;
 	i = 0;
+	s = ft_itoa(number);
 	while (s[i])
+	{
+		ft_putchar(&s[i], 1);
 		i++;
+	}
+	while (n)
+	{
+		ft_putchar(' ', 1);
+		n--;
+	}
 	return (i);
 }
 // ft_hashlen returns length of x or X addresses, precedented by 0x or 0X for values diffrent than zero
-// ft_xlen & ft_Xlen can be used instad. Needs checking.
-int ft_hashlen(int number)
+// ft_xlen & ft_Xlen can be used instead. Needs checking.
+int ft_hashlen(int number, int format)
 {
-	return (0);
+	int i;
+
+	i = 0;
+	if (format == 'X')
+	{
+		ft_putstr("0X", 1);
+		i = ft_Xlen(number) + 2;
+	}
+	if (format == 'x')
+	{
+		ft_putstr("0x", 1);
+		i = ft_xlen(number) + 2;
+	}
+	return (i);
 }
 // ft_spacelen returns length of value preceded by blank space if no sign is written, hence i++;
 int ft_spacelen(int number)
@@ -187,7 +279,7 @@ int ft_spacelen(int number)
 
 	i = 0;
 	if (number == 0)
-		return (i);
+		return (i++);
 	while (number)
 	{
 		number = number / 10;
