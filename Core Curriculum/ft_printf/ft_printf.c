@@ -6,7 +6,7 @@
 /*   By: aolteanu <aolteanu.student@42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 16:09:53 by aolteanu          #+#    #+#             */
-/*   Updated: 2024/03/18 17:18:26 by aolteanu         ###   ########.fr       */
+/*   Updated: 2024/03/19 19:54:47 by aolteanu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,24 @@
 // ' ' (space)	If no sign is going to be written, a blank space is inserted before the value.
 #include "ft_printf.h"
 
+char	*ft_fromat0(char format)
+{
+	char *zero_format;
+	
+  	while (format >= '0' && format <= '9')
+		{	
+			width[i] = format;
+	  		format++;
+			i++;
+		}
+}
+
 int ft_checkformat(char format, va_list arg)
 {
+	char	*width;
+	int		i;
+
+	i = 0;
 // try with char instead of int later for ft_charlen
 	if (format == 'c')
 		return (ft_charlen(va_arg(arg, int))); 
@@ -59,18 +75,17 @@ int ft_checkformat(char format, va_list arg)
 		return (ft_strlen(va_arg(arg, char	*)));
 	if (format == 'p')
 		return (ft_plen(va_arg(arg, void *)));
-// return length of integer in base 10. Maybe same function, dlen.	
    if (format == 'd' || format == 'i')
 		return (ft_dorilen(va_arg(arg, int)));
 	if (format == 'u')
 		return (ft_ulen(va_arg(arg, unsigned int)));
-	if (format == 'x')
-		return (ft_xlen(va_arg(arg, int)));
-	if (format == 'X')
-		return (ft_Xlen(va_arg(arg, int)));
+	if (format == 'x' || format == 'X')
+		return (ft_xXlen(va_arg(arg, int)));
 	if (format == '%')
       return (ft_pcentlen(va_arg(arg, int)));
    // bonus
+   if (format == '0' || format == '-' || format == ' ' || format == '.')
+		execute order 66;
    if (format == '0')
    {
       if (format++ == '-')
@@ -87,12 +102,10 @@ int ft_checkformat(char format, va_list arg)
          write(1, "flag '0' is ignored when flag '-' is present", 45);
          return (1);        
       }
-	  while (format >= '0' && format <= '9')
-	  	format++;
-      else
-	  	return (ft_dashlen(va_arg(arg, int), format++));
+	  if (format++ != '0')
+		ft_fromat0(format);
+	  	return (ft_dashlen(va_arg(arg, int), ft_atoi(width)));
    }
-   // Return xlen / Xlen + 2 from the 0x and 0X characters prefixed to them;
 	if (format == '#')
 		return (ft_hashlen(va_arg(arg, int), format++));
 	if (format == ' ')

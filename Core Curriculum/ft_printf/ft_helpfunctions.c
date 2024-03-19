@@ -6,7 +6,7 @@
 /*   By: aolteanu <aolteanu.student@42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 19:35:48 by aolteanu          #+#    #+#             */
-/*   Updated: 2024/03/18 16:55:51 by aolteanu         ###   ########.fr       */
+/*   Updated: 2024/03/19 19:29:11 by aolteanu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,24 @@ void	ft_putstr(char *s, int fd)
 	}
 }
 
+char *ft_revstr(char *s)
+{
+	char *revstr;
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	while (s[i])
+		i++;
+	while (i >= 0)
+	{
+		revstr[j] = s[i];
+		i--;
+		j++;
+	}
+	return (revstr);
+}
 // ft_charlen returns the length of a char
 int ft_charlen(int number)
 {
@@ -166,38 +184,19 @@ int ft_ulen(unsigned int number)
 	return (i);
 }
 // ft_xlen returns length of number in base 16 lowercase
-int ft_xlen(int number)
+
+// ft_Xlen returns length of number in base 16 uppercase
+int ft_xXlen(char format, int number)
 {
 	int 	i;
 	int 	j;
 	char	*s;
 	char	*str;
 
-	s = "0123456789abcdef";
-	i = 0;
-	while (number > 0)
-	{
-		str[i] = s[(number % 16) * 16];
-		number /= 16;
-		i++;
-	}
-	j = i;
-	while (i > -1)
-	{
-		write (1, &s[i], 1);
-		i--;
-	}
-	return (j);
-}
-// ft_Xlen returns length of number in base 16 uppercase
-int ft_Xlen(int number)
-{
-int 	i;
-	int 	j;
-	char	*s;
-	char	*str;
-
-	s = "0123456789ABCDEF";
+	if (format == 'x')
+		s = "0123456789abcdef";
+	if (format == 'X')
+		s = "0123456789ABCDEF";
 	i = 0;
 	if (number == 0)
 		return (i++);
@@ -207,13 +206,7 @@ int 	i;
 		number /= 16;
 		i++;
 	}
-	j = i;
-	while (i > -1)
-	{
-		write (1, &s[i], 1);
-		i--;
-	}
-	return (j);
+	ft_putstr(ft_revstr(str), 1);
 }
 // ft_pcentlen returns lengrh of percent character (can be the same as ft_charlen)
 int ft_pcentlen(int number)
@@ -234,9 +227,9 @@ int ft_zerolen(int number)
 	return (i);
 }
 // ft_dashlen left-side justifies decimal with n number of spaces
-int ft_dashlen(int number, int n)
+int ft_dashlen(int number, int width)
 {
-	int i;
+	int 	i;
 	char	*s;
 
 	i = 0;
@@ -246,10 +239,10 @@ int ft_dashlen(int number, int n)
 		ft_putchar(&s[i], 1);
 		i++;
 	}
-	while (n)
+	while (width)
 	{
 		ft_putchar(' ', 1);
-		n--;
+		width--;
 	}
 	return (i);
 }
