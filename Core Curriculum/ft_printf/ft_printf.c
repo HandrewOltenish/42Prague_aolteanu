@@ -6,7 +6,7 @@
 /*   By: aolteanu <aolteanu.student@42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 16:09:53 by aolteanu          #+#    #+#             */
-/*   Updated: 2024/03/19 19:54:47 by aolteanu         ###   ########.fr       */
+/*   Updated: 2024/03/21 18:42:55 by aolteanu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,25 +50,13 @@
 // ' ' (space)	If no sign is going to be written, a blank space is inserted before the value.
 #include "ft_printf.h"
 
-char	*ft_fromat0(char format)
-{
-	char *zero_format;
-	
-  	while (format >= '0' && format <= '9')
-		{	
-			width[i] = format;
-	  		format++;
-			i++;
-		}
-}
+
 
 int ft_checkformat(char format, va_list arg)
 {
-	char	*width;
 	int		i;
 
 	i = 0;
-// try with char instead of int later for ft_charlen
 	if (format == 'c')
 		return (ft_charlen(va_arg(arg, int))); 
 	if (format == 's')
@@ -85,39 +73,7 @@ int ft_checkformat(char format, va_list arg)
       return (ft_pcentlen(va_arg(arg, int)));
    // bonus
    if (format == '0' || format == '-' || format == ' ' || format == '.')
-		execute order 66;
-   if (format == '0')
-   {
-      if (format++ == '-')
-      {
-         write(1, "flag '0' is ignored when flag '-' is present", 45);
-         return (1);        
-      }
-      else return (ft_zerolen(va_arg(arg, int)));
-   }
-   if (format == '-')
-   {
-      if (format++ == '0')
-      {
-         write(1, "flag '0' is ignored when flag '-' is present", 45);
-         return (1);        
-      }
-	  if (format++ != '0')
-		ft_fromat0(format);
-	  	return (ft_dashlen(va_arg(arg, int), ft_atoi(width)));
-   }
-	if (format == '#')
-		return (ft_hashlen(va_arg(arg, int), format++));
-	if (format == ' ')
-	{	
-		if (va_arg(arg, int) < 0)
-			return (ft_dorilen(va_arg(arg, int)));
-		else if (va_arg(arg, int) >= 0)
-		{
-			ft_putchar(' ', 1);
-			return (ft_dorilen(va_arg(arg, int)), format++);
-		}
-	}
+		return (ft_bonusformat(format, va_arg(arg, int)));
 	return (0);
 }
 
@@ -133,8 +89,11 @@ int ft_printf (const char *str, ...)
 		return (0);
 	while (s)
 	{
-		if (s[i] == '%')
-			i = ft_checkformat(s[i++], arg);
+		if (*s == '%')
+			i++;
+			if (ft_bonusformat(s++), arg)
+				i = ft_bonusformat(i++);
+			i = ft_checkformat(s[i], arg);
 		i++;
 	}
 	return (0);
