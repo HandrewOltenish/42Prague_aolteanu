@@ -6,7 +6,7 @@
 /*   By: aolteanu <aolteanu.student@42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:33:21 by aolteanu          #+#    #+#             */
-/*   Updated: 2024/05/12 18:47:09 by aolteanu         ###   ########.fr       */
+/*   Updated: 2024/05/13 12:50:28 by aolteanu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,6 @@ void	ft_transfer_bits(int signum)
 		c += 1 << bit;
 	if (signum == SIGUSR2)
 		c += 0 << bit;
-	if (signum == SIGQUIT)
-	{
-		bit = 7;
-		c = 0;
-		fflush(NULL);
-		exit (0);
-	}
 	bit--;
 	if (bit == -1)
 	{
@@ -51,12 +44,6 @@ void	ft_transfer_bits(int signum)
 		bit = 7;
 		c = 0;
 	}
-}
-
-void	ft_exit(int signum)
-{
-	if (signum == SIGQUIT)
-		fflush(NULL);
 }
 
 int	main(void)
@@ -68,9 +55,8 @@ int	main(void)
 	{
 		sender_pid = getpid();
 		write(1, "Process with pid ", 18);
-		write(1, ft_itoa((int)sender_pid), ft_numlength((int)getpid()));
+		ft_putnbr_fd(sender_pid, 1);
 		write (1, " started.\n", 11);
-		free(ft_itoa((int)sender_pid));
 	}
 	while (1)
 	{
