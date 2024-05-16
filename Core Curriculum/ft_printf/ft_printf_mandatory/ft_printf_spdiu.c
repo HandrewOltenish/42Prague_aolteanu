@@ -6,13 +6,13 @@
 /*   By: aolteanu <aolteanu.student@42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 17:02:11 by aolteanu          #+#    #+#             */
-/*   Updated: 2024/04/16 15:13:40 by aolteanu         ###   ########.fr       */
+/*   Updated: 2024/05/16 18:00:35 by aolteanu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_strlen(char	*str)
+int	ft_printf_strlen(char	*str)
 {
 	int	i;
 
@@ -33,9 +33,9 @@ int	ft_plen(void *p)
 	int		i;
 
 	if (p == 0)
-		return (ft_putstr("(nil)"));
+		return (ft_printf_putstr("(nil)"));
 	p1 = (size_t)p;
-	i = ft_putstr("0x") + ft_pint(p1);
+	i = ft_printf_putstr("0x") + ft_pint(p1);
 	return (i);
 }
 
@@ -65,17 +65,17 @@ int	ft_dorilen(int number)
 
 	i = 0;
 	if (number == 0)
-		return (ft_charlen(i + '0'));
+		return (ft_printf_charlen(i + '0'));
 	if (number < 0)
 	{
 		if (number == -2147483648)
-			return (ft_strlen("-2147483648"));
+			return (ft_printf_strlen("-2147483648"));
 		number = number * (-1);
-		i = i + ft_charlen('-');
+		i = i + ft_printf_charlen('-');
 	}
 	if (number < 10)
 	{
-		i = i + ft_charlen(number + '0');
+		i = i + ft_printf_charlen(number + '0');
 	}
 	else
 	{
@@ -91,10 +91,10 @@ int	ft_ulen(unsigned int number)
 
 	i = 0;
 	if (number == 0)
-		return (ft_charlen('0'));
+		return (ft_printf_charlen('0'));
 	if (number < 10)
 	{
-		i = i + ft_charlen(number + '0');
+		i = i + ft_printf_charlen(number + '0');
 	}
 	else
 	{

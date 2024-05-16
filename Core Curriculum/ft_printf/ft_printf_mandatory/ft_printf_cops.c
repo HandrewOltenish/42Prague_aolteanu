@@ -6,13 +6,13 @@
 /*   By: aolteanu <aolteanu.student@42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 17:00:54 by aolteanu          #+#    #+#             */
-/*   Updated: 2024/04/16 15:13:36 by aolteanu         ###   ########.fr       */
+/*   Updated: 2024/05/16 17:58:11 by aolteanu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_putstr(char	*s)
+int	ft_printf_putstr(char	*s)
 {
 	int	i;
 	int	len;
@@ -23,13 +23,13 @@ int	ft_putstr(char	*s)
 		return (0);
 	while (s[i])
 	{
-		len = len + ft_charlen(s[i]);
+		len = len + ft_printf_charlen(s[i]);
 		i++;
 	}
 	return (len);
 }
 
-int	ft_strsize(char *s)
+int	ft_printf_strsize(char *s)
 {
 	int	i;
 
@@ -39,7 +39,7 @@ int	ft_strsize(char *s)
 	return (i);
 }
 
-char	*ft_revstr(char *s, char *revstr)
+char	*ft_printf_revstr(char *s, char *revstr)
 {
 	int	i;
 	int	j;
@@ -60,7 +60,7 @@ char	*ft_revstr(char *s, char *revstr)
 	return (revstr);
 }
 
-int	ft_charlen(int c)
+int	ft_printf_charlen(int c)
 {
 	return (write(1, &c, 1));
 }
