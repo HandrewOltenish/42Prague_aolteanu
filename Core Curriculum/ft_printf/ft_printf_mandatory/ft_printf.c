@@ -6,7 +6,7 @@
 /*   By: aolteanu <aolteanu.student@42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 16:12:40 by aolteanu          #+#    #+#             */
-/*   Updated: 2024/04/16 15:13:44 by aolteanu         ###   ########.fr       */
+/*   Updated: 2024/05/16 17:59:27 by aolteanu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,16 @@ int	ft_xxlen(char format, unsigned int number)
 	str[i] = '\0';
 	i--;
 	while (i + 1)
-		ft_charlen(str[i--]);
-	return (ft_strsize(str));
+		ft_printf_charlen(str[i--]);
+	return (ft_printf_strsize(str));
 }
 
 int	ft_checkformat(char format, va_list arg)
 {
 	if (format == 'c')
-		return (ft_charlen(va_arg(arg, int)));
+		return (ft_printf_charlen(va_arg(arg, int)));
 	if (format == 's')
-		return (ft_strlen(va_arg(arg, char *)));
+		return (ft_printf_strlen(va_arg(arg, char *)));
 	if (format == 'p')
 		return (ft_plen(va_arg(arg, void *)));
 	if (format == 'd' || format == 'i')
@@ -52,7 +52,7 @@ int	ft_checkformat(char format, va_list arg)
 	if (format == 'x' || format == 'X')
 		return (ft_xxlen(format, va_arg(arg, int)));
 	if (format == '%')
-		return (ft_charlen('%'));
+		return (ft_printf_charlen('%'));
 	return (format);
 }
 
