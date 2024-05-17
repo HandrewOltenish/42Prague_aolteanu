@@ -26,7 +26,7 @@ char	*ft_next(char *buffer)
 		free(buffer);
 		return (NULL);
 	}
-	next_line = (char *)malloc((ft_strlen(buffer) - i + 1) * sizeof(char));
+	next_line = (char *)malloc((ft_gnl_strlen(buffer) - i + 1) * sizeof(char));
 	if (next_line == 0)
 		return (0);
 	i++;
