@@ -12,13 +12,6 @@
 
 #include "get_next_line.h"
 
-// static char *buffer allows to update its value
-// for every time the get_next_line() function is called
-// char *line_read is where we store the string and
-// return it later
-// ft_get() gets the line, reads it, stores it for later
-// ft_next() searches for next line
-// ft_line() returns the current line read
 char	*ft_next(char *buffer)
 {
 	char	*next_line;
@@ -33,7 +26,7 @@ char	*ft_next(char *buffer)
 		free(buffer);
 		return (NULL);
 	}
-	next_line = (char *)malloc((ft_strlen(buffer) - i + 1) * sizeof(char));
+	next_line = (char *)malloc((ft_gnl_strlen(buffer) - i + 1) * sizeof(char));
 	if (next_line == 0)
 		return (0);
 	i++;
@@ -91,7 +84,7 @@ char	*ft_get(int fd, char *buffer)
 			return (NULL);
 		}
 		get_buffer[bytes_read] = '\0';
-		buffer = ft_strjoin(buffer, get_buffer);
+		buffer = ft_gnl_strjoin(buffer, get_buffer);
 		if (ft_strchr(buffer, '\n'))
 			break ;
 	}
@@ -113,41 +106,5 @@ char	*get_next_line(int fd)
 	buffer = ft_next(buffer);
 	return (current_line);
 }
-
-// int main(void)
-// {
-// 	char	*gnl;
-// 	size_t	i;
-// 	int	fd;
-// 	char	buf[50];
-
-// 	fd = open("test.txt", O_RDONLY);
-// 	gnl = get_next_line(fd);
-// 	i = 0;
-// 	while (read(fd, buf, BUFFER_SIZE))
-// 	{
-// 		printf("%s", gnl);
-// 		i++;
-// 	}
-// 	return (0);
-// }
-
-// int	main()
-// {
-// 	char *line;
-// 	int	i;
-// 	int fd;
-
-// 	fd = open("test.txt", O_RDONLY);
-// 	i = 0;
-// 	while (1)
-// 	{
-// 		line = get_next_line(fd);
-// 		if (!line)
-// 			break ;
-// 		printf("line %d: %s", i, line);
-// 		free(line);
-// 		i++;
-// 	}
 // 	return (0);
 // }
