@@ -11,16 +11,8 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-// char *read_buffer is used to store all the concatenated lines up until now
-// ssize_t bytes_read is the number of bytes read using the read function
-// bytes_read = 1 initial value to initiate loop
-// while bytes_read != 0 read through read_buffer and assign the bytes
-// at index bytes_read to '\0'
-// if bytes_read == -1 it means either EOF or error, so we free the buffer and
-// return (0);
-// concatenate strings buffer and read_buffer
 
-void	ft_bzero(void *s, size_t n)
+void	ft_gnl_bzero(void *s, size_t n)
 {
 	size_t	i;
 
@@ -32,30 +24,30 @@ void	ft_bzero(void *s, size_t n)
 	}
 }
 
-void	*ft_calloc(size_t n, size_t size)
+void	*ft_gnl_calloc(size_t n, size_t size)
 {
 	void	*p;
 
 	p = malloc(n * size);
 	if (p == 0)
 		return (NULL);
-	ft_bzero(p, n * size);
+	ft_gnl_bzero(p, n * size);
 	return (p);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_gnl_strjoin(char *s1, char *s2)
 {
 	char	*str;
 	int		i;
 	int		j;
 
 	if (s1 == 0)
-		s1 = ft_calloc(1, 1);
+		s1 = ft_gnl_calloc(1, 1);
 	// if (s1 == 0)
 	// 	return (NULL);
 	if (s2 == 0)
 		return (NULL);
-	str = (char *)malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
+	str = (char *)malloc((ft_gnl_strlen(s1) + ft_gnl_strlen(s2) + 1) * sizeof(char));
 	if (str == 0)
 		return (NULL);
 	i = -1;
@@ -64,12 +56,12 @@ char	*ft_strjoin(char *s1, char *s2)
 		str[i] = s1[i];
 	while (s2[j])
 		str[i++] = s2[j++];
-	str[ft_strlen(s1) + ft_strlen(s2)] = '\0';
+	str[ft_gnl_strlen(s1) + ft_gnl_strlen(s2)] = '\0';
 	free(s1);
 	return (str);
 }
 
-size_t	ft_strlen(const char *s)
+size_t	ft_gnl_strlen(const char *s)
 {
 	size_t	i;
 
@@ -79,7 +71,7 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_gnl_strchr(const char *s, int c)
 {
 	int	i;
 
