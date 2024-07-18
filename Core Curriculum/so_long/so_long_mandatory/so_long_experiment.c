@@ -102,36 +102,17 @@ void map_handle_experiment(char	*file)
 	printf("%s", "Valid Map\n");
 	fd = close(file);
 }
-
-void path_handle_experiment(char	*file) // use recursive function
+// flood fill, never do j + 2, out of bounds
+void path_handle_experiment(char**	map_line, char position, int i, int j) // use recursive function
 {
-	int fd;
-	int i;
-	int j;
-	char	**map_line;
-
-	i = 0;
-	j = 0;
-	fd = open(file, O_RDONLY);
-	map_line = get_next_line(fd);
-	while (fd)
-	{
-		while (ft_strchr(map_line[i][j], 'P'));
+		if (position != '1' || position != 'E')
 		{
-			int new x;
-			int new y;
-			if(map_line[i][j--] == 0)
-				map_line[i][j] = X;
-			if (map_line[i][j + 2] == 0)
-				map_line[i][j] = X;
-			if (map_line[i - 1][j -1] == 0)
-				map_line[i][j] = X;
-			if (map_line[i + 2][ j + 1])
-				map_line[i][j] = X;
-			j++;
+			position = 'X';
+			path_handle_experiment(map_line, map_line[i][j - 1], i, j - 1);
+			path_handle_experiment(map_line, map_line[i][j + 1], i, j + 1);
+			path_handle_experiment(map_line, map_line[i - 1][j], i - 1, j);
+			path_handle_experiment(map_line, map_line[i - 1][j - 1], i - 1, j - 1);
 		}
-		i++;
-	}
 }
 
 int main(void)
