@@ -27,5 +27,7 @@ while map
 	if map[x][z] == P[1][1]
 	P location x = x
 		 z = z;
+Use structure to make it easier to Floodfill the map.
+Resolve recurisve function problems
 3. Move the player, moving 'P' on map accordingly.
 4. 
