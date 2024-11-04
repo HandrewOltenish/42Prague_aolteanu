@@ -6,7 +6,7 @@
 /*   By: aolteanu <aolteanu.student@42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 13:15:51 by aolteanu          #+#    #+#             */
-/*   Updated: 2024/07/16 20:40:11 by aolteanu         ###   ########.fr       */
+/*   Updated: 2024/11/04 19:34:30 by aolteanu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,11 @@
 #define HEIGHT 600
 #define BPP sizeof (int32_t)
 
-// use structures example
-
-static void error(void)
-{
-	puts(mlx_strerror(mlx_errno));
-	exit(EXIT_FAILURE);
-}
+// static void error(void)
+// {
+// 	puts(mlx_strerror(mlx_errno));
+// 	exit(EXIT_FAILURE);
+// }
 
 uint8_t get_rgba(int r, int g, int b, int a)
 {
@@ -73,65 +71,109 @@ void	key_movement(mlx_key_data_t keydata, void	*param)
 	detect_collision(keydata, img);
 }
 
-
-void map_handle_experiment(char	*file)
+int map_handle_experiment(int fd)
 {
-	int		fd;
 	char	*counter;
 	char	*pe;
+	char	*temp;
+	int		count_strings;
+
+	count_strings = 0;
 	counter = (char	*)malloc(3 * sizeof(char));
-	fd = open(file, O_RDONLY);
-		if (fd < 0)
-			error();
+	if (counter == 0)
+		printf("Error: Failed to allocate memory to counter");
+	// fd = open("map.ber", O_RDONLY);
+	// 	if (fd < 0)
+	// 		printf("Error. File cannot be opened.");
 	pe = get_next_line(fd);
 		if (pe == 0)
-			error();
+			printf("Error: File is empty");
+	count_strings++;
+	temp = pe;
 	while (pe)
 	{
+		temp = pe;
 		if ((ft_strrchr(counter, 'P') && ft_strrchr(pe, 'P'))
 				|| (ft_strchr(counter, 'E') && (ft_strrchr(pe, 'P'))))
-					error() ;
+					printf("Erorr: Multiple P or E in map");
 		if (ft_strrchr(pe, 'P'))
 			ft_strlcat(counter, "P", 1);
 		else if (ft_strrchr(pe, 'E'))
 			ft_strlcat(counter, "E", 1);
-		if (ft_strlen(get_next_line(fd)) != ft_strlen(pe))
-			error();
+		if (ft_strncmp(pe, temp, ft_strlen(pe)))
+			printf("Error: Strings have different sizes");
 		pe = get_next_line(fd);
+		count_strings++;
 	}
-	printf("%s", "Valid Map\n");
-	fd = close(file);
-}
-// flood fill, never do j + 2, out of bounds
-void path_handle_experiment(char**	map_line, char position, int i, int j) // use recursive function
-{
-		if (position != '1' || position != 'E')
-		{
-			position = 'X';
-			path_handle_experiment(map_line, map_line[i][j - 1], i, j - 1);
-			path_handle_experiment(map_line, map_line[i][j + 1], i, j + 1);
-			path_handle_experiment(map_line, map_line[i - 1][j], i - 1, j);
-			path_handle_experiment(map_line, map_line[i - 1][j - 1], i - 1, j - 1);
-		}
+	printf("%s", "Valid Map");
+	close(fd);
+	return(count_strings);
 }
 
+// Logic is OK consider collectible counter and exit counter
+void path_handle_experiment(char	**map, char position, int i, int j) 
+{
+	if (position != '1' || position != 'E')
+	{
+		position = 'X';
+		path_handle_experiment(map, map[i][j - 1], i, j - 1);
+		path_handle_experiment(map, map[i][j + 1], i, j + 1);
+		path_handle_experiment(map, map[i - 1][j], i - 1, j);
+		path_handle_experiment(map, map[i - 1][j - 1], i - 1, j - 1);
+	}
+	else if (position == 'E')
+		ft_printf("Valid Path!");
+	else ft_printf("Invalid Path!");
+}
+
+int	ft_countstrings(int fd)
+{
+	int count;
+
+	count = 0;
+	while (fd)
+	{
+		get_next_line(fd);
+		count++;
+	}
+	return (count);
+}
+
+// Split the functions. One function is doing too many things to accurately track in the future!
 int main(void)
 {
 	mlx_t	*mlx = mlx_init(WIDTH, HEIGHT, "Project Escape Schengen", true);
 	mlx_texture_t *player;
 	mlx_image_t	*player_img;
-
-	map_handle_experiment("map.ber");
+	int fd;
+	int i;
+	char	**map_copy;
+	
+	i = 0;
+	fd = open("map.ber", O_WRONLY);
+	if (fd < 0)
+		printf("Error: No file present!\n");
+	else
+	{
+		map_copy = (char **)malloc(sizeof(char *) * (map_handle_experiment(fd) + 1));
+		while (fd)
+		{
+			map_copy[i] = get_next_line(fd);
+			i++;
+		}
+		path_handle_experiment(map_copy, map_copy[0][0], 0, 0);
+		close(fd);
+	}
 	if (!mlx)
-		error();
+		printf("Error");
 	player = mlx_load_png("./char.png");
 	if (!player)
-		error();
+		printf("Error");
 	player_img = mlx_texture_to_image(mlx, player);
 	if (!player_img)
-		error();
+		printf("Error");
 	if (mlx_image_to_window(mlx, player_img, WIDTH -200, HEIGHT - 200) < 0)
-		error();
+		printf("Error");
 	mlx_key_hook(mlx, (mlx_keyfunc)key_movement, player_img);
 	mlx_loop(mlx);
 	mlx_delete_image(mlx, player_img);
