@@ -6,7 +6,7 @@
 /*   By: aolteanu <aolteanu.student@42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 13:15:51 by aolteanu          #+#    #+#             */
-/*   Updated: 2024/11/11 16:08:21 by aolteanu         ###   ########.fr       */
+/*   Updated: 2024/11/20 21:48:15 by aolteanu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,17 +63,25 @@ void	key_movement(mlx_key_data_t keydata, void	*param)
 	detect_collision(keydata, img);
 }
 
-int char_check(char c)
+int char_check(t_game_map *map, char c)
 {
 	if (c == GAME_PLAYER
 		|| c == GAME_EXIT
 		|| c == GAME_COLLECTIBLE
 		|| c == GAME_WALL)
+	{
+		if (c == GAME_PLAYER)
+			map->player_count++;
+		if (c == GAME_EXIT)
+			map->exit_count++;
+		if (c == GAME_COLLECTIBLE)
+			map->collectible_count++;
 		return (1);
+	}
 	return (0);
 }
 
-char *map_handle_experiment(int strings_count, t_game_map	*map)
+int map_handle_experiment(int strings_count, t_game_map	*map)
 {
 	map->collectible_count = 0;
 	map->player_count = 0;
@@ -87,67 +95,106 @@ char *map_handle_experiment(int strings_count, t_game_map	*map)
 				if (map->copy[Y][X] != GAME_WALL
 					&& map->copy[Y][X] != '\n'
 					&& map->copy[Y][X + 1] != '\0')
-					return("Invalid map: Outer perimeter invalid.");
+					{
+						puts("Invalid map: Outer perimeter invalid.");
+						return (0);
+					}
 			}
-			if (!char_check(map->copy[Y][X]))
-				return("Invalid map: Illegal character inside map.");
+			if (!char_check(map, map->copy[Y][X]))
+			{
+				puts("Invalid map: Illegal character inside map.");
+				return (0);
+			}
 			X++;
 		}
 		if (strings_count != X)
-			return("Invalid map: Different line size");
+		{
+			puts("Invalid map: Different line size");
+			return(0);
+		}
 		Y++;
 	}
-	return ("Valid Map! Enjoy the game!");
+	puts("Valid Map! Enjoy the game!");
+	return (1);
 }
 
-void path_handle_experiment(t_game_map	map, int j, int i) 
+// COMPLETE OK proceed with map_handle_experiment
+// int path_handle_experiment(t_game_map *map, int y, int x)
+// {
+// 	printf("Y: %i X: %i char: %c\n", y, x, map->copy[y][x]);
+// 	if (y >= MAX_Y || x >= MAX_X || y < 0 || x < 0 || map->copy[y][x] == 'X')
+// 	{
+// 		return (0);
+// 	}
+// 	if (map->copy[y][x] == GAME_COLLECTIBLE)
+// 		map->collectible_count--;
+// 	if (map->copy[y][x] == GAME_EXIT)
+// 		map->exit_count--;
+// 	if (map->copy[y][x] == GAME_PLAYER)
+// 		map->player_count--;
+// 	if (map->copy[y][x] == GAME_TILE)
+// 		map->copy[y][x]= 'X';
+// 	if (map->copy[y][x - 1] != GAME_WALL)
+// 		path_handle_experiment(map, y, x - 1);
+// 	if (map->copy[y][x + 1] != GAME_WALL)
+// 		path_handle_experiment(map, y, x + 1);
+// 	if (map->copy[y - 1][x] != GAME_WALL)
+// 		path_handle_experiment(map, y - 1, x);
+// 	if (map->copy[y + 1][x] != GAME_WALL)
+// 		path_handle_experiment(map, y + 1, x);
+// 	if (!map->collectible_count && !map->exit_count && !map->player_count)
+// 	{
+// 		puts("Valid map!");
+// 		return(1);
+// 	}
+// 	return (0);
+// }
+
+void ft_count_size(int fd, t_game_map *map)
 {
-	if (!map.collectible_count && !map.exit_count && !map.player_count)
-		puts("Valid map!");
-	if (map.map[j][i] == GAME_WALL || map.map[j][i] == 'X')
-	{
+	char	*str;
+	int	i;
+
+	i = 0;
+	fd = open(MAP_PATH, O_RDONLY);
+	MAX_Y = 0;
+	MAX_X = 0;
+	str = get_next_line(fd);
+	MAX_Y++;
+	if (!str)
 		return ;
-	}
-	if (map.map[j][i] == GAME_COLLECTIBLE)
-		map.collectible_count--;
-	if (map.map[j][i] == GAME_EXIT)
-		map.exit_count--;
-	if (map.map[j][i] == GAME_PLAYER)
-	map.map[j][i] = 'X';
-	if (map.map[j][i - 1])
-		path_handle_experiment(map, j, i - 1);
-	if (map.map[j][i + 1])
-		path_handle_experiment(map, j, i + 1);
-	if (map.map[j - 1][i])
-		path_handle_experiment(map, j - 1, i);
-	if (map.map[j + 1][i])
-		path_handle_experiment(map, j + 1, i);
+	while (str[i])
+		i++;
+	MAX_X = i;
+	while (get_next_line(fd))
+		MAX_Y++;
+	close(fd);
 }
 
-void	ft_count_size(t_game_map *map, int fd)
+int ft_allocate_map_memory(t_game_map *map)
 {
 	Y = 0;
-	X = 0;
-	map->map[X] = get_next_line(fd);
-	while (map->map)
+	map->map = (char **)malloc(sizeof(char *) * MAX_Y);
+	map->copy = (char **)malloc(sizeof(char *) * MAX_Y);
+	if (!map->map && !map->copy)
+		return 0;
+	while (Y <= MAX_X)
 	{
-		while (map->map[X][Y])
-			X++;
-		get_next_line(fd);
-		printf("%s\n", map->map[X]);
+		map->map[Y] = (char *)malloc(sizeof(char ) * MAX_X);
+		map->copy[Y] = (char *)malloc(sizeof(char ) * MAX_X);
+		if (!map->map[Y] && map->copy[Y])
+			return 0;
 		Y++;
 	}
-	MAX_Y = Y;
-	MAX_X = X;
 	Y = 0;
-	X = 0;
+	return (1);
 }
 
-void copy_map(int fd,char** map, int strings_count)
+void copy_map(int fd, char ** map, int strings_count)
 {
 	int j;
-
 	j = 0;
+	fd = open(MAP_PATH, O_RDONLY);
 	while (j <= strings_count)
 	{
 		map[j] = get_next_line(fd);
@@ -166,21 +213,21 @@ int main(void)
 	t_game_map *map;
 	int fd;
 
+	fd = 0;
 	map = (t_game_map *)malloc(sizeof(t_game_map));
 	if (!map)
 		puts("Error: Failed to allocate memory for struct");
-	fd = open(MAP_PATH, O_RDONLY);
-	if (fd < 0)
-		puts("Error: Could not open file. Check if file exists");
-	ft_count_size(map, fd);
-	close(fd);
-	fd = open(MAP_PATH, O_RDONLY);
-	if (fd < 0)
-		puts("Error: Could not open file. Check if file exists");
-	map->copy = (char **)malloc(( + 1) * sizeof(char *));
-		if (!map->copy)
-		puts("Error: Failed to allocate memory for copy");
-	// copy_map(fd, map->copy, strings_count);
+	ft_count_size(fd, map);
+	if (!ft_allocate_map_memory(map))
+	{
+		puts("Error: Failed to allocate memory for map");
+		return (1);
+	}
+	copy_map(fd,map->map, MAX_Y);
+	map->copy = map->map;
+	path_handle_experiment(map, 1, 1);
+	free(map);
+	map_handle_experiment(MAX_Y, map);
 	// if (!mlx)
 	// 	puts("Error: Could not initialize mlx");
 	// player = mlx_load_png("./char.png");
@@ -193,8 +240,6 @@ int main(void)
 	// 	puts("Error: Could not draw window");
 	// mlx_key_hook(mlx, (mlx_keyfunc)key_movement, player_img);
 	// mlx_loop(mlx);
-	// printf("%s", map_handle_experiment(strings_count, map));
-	// path_handle_experiment(map, 0, 0);
 	// mlx_delete_image(mlx, player_img);
 	// mlx_terminate(mlx);
 	// free(map);
