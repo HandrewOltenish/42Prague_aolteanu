@@ -6,7 +6,7 @@
 /*   By: aolteanu <aolteanu.student@42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 13:15:51 by aolteanu          #+#    #+#             */
-/*   Updated: 2024/11/20 21:48:15 by aolteanu         ###   ########.fr       */
+/*   Updated: 2024/11/29 22:47:33 by aolteanu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,50 +68,97 @@ int char_check(t_game_map *map, char c)
 	if (c == GAME_PLAYER
 		|| c == GAME_EXIT
 		|| c == GAME_COLLECTIBLE
-		|| c == GAME_WALL)
+		|| c == GAME_WALL
+		|| c == GAME_TILE)
 	{
 		if (c == GAME_PLAYER)
+		{
+			if (map->player_count == 1)
+			{
+				printf("This is a single player game. Only one player allowed. :P\n");
+				return (0);
+			}
 			map->player_count++;
+		}
 		if (c == GAME_EXIT)
-			map->exit_count++;
+			{
+				if (map->exit_count == 1)
+				{
+					printf("Only one exit per level allowed :P\n");
+					return (0);
+				}
+				map->exit_count++;
+			}
 		if (c == GAME_COLLECTIBLE)
 			map->collectible_count++;
 		return (1);
 	}
 	return (0);
 }
+// Logic: check perimeter width -> check invalid characters -> check
+int check_perimeter_height(char	**str, int y, int x)
+{
+	while (str[y])
+	{
+		if (str[y][x] != GAME_WALL)
+		{
+			printf ("Invalid perimeter. Wall breaks at height index %i %i!", y, x);
+			return (0);
+		}
+		y++;
+	}
+	return (1);
+}
 
+int check_perimeter_width(char	*str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+	{
+		i++;
+	}
+	i--;
+	if (str[i] == '\n')
+		i--;
+	if (str[i] != GAME_WALL)
+	{
+		printf ("Invalid perimeter. Wall breaks at width index %i!", i);
+		return (0);
+	}
+	return (1);
+}
+// I want to count from [Y][MAX_X] downwards with char **
 int map_handle_experiment(int strings_count, t_game_map	*map)
 {
 	map->collectible_count = 0;
 	map->player_count = 0;
 	map->exit_count = 0;
+	Y = 0;
+	X = 0;
+	if (!(check_perimeter_height(map->copy, Y, X)
+		&& check_perimeter_height(map->copy, Y, MAX_X - 2)
+		&& check_perimeter_width(map->copy[Y])
+		&& check_perimeter_width(map->copy[MAX_Y - 1])))
+		return (0);
 	while (map->copy[Y])
 	{
-		while (map->copy[Y][X])
+		while (map->copy[Y][X] && X < MAX_X - 2)
 		{
-			if (Y == 0 || Y == strings_count)
-			{
-				if (map->copy[Y][X] != GAME_WALL
-					&& map->copy[Y][X] != '\n'
-					&& map->copy[Y][X + 1] != '\0')
-					{
-						puts("Invalid map: Outer perimeter invalid.");
-						return (0);
-					}
-			}
 			if (!char_check(map, map->copy[Y][X]))
 			{
-				puts("Invalid map: Illegal character inside map.");
+				printf("Invalid map: Illegal character inside map at %i %i.", Y, X);
 				return (0);
 			}
 			X++;
 		}
-		if (strings_count != X)
+		if (strings_count > X)
 		{
 			puts("Invalid map: Different line size");
 			return(0);
 		}
+		X = 0;
 		Y++;
 	}
 	puts("Valid Map! Enjoy the game!");
@@ -156,9 +203,9 @@ void ft_count_size(int fd, t_game_map *map)
 	int	i;
 
 	i = 0;
-	fd = open(MAP_PATH, O_RDONLY);
 	MAX_Y = 0;
 	MAX_X = 0;
+	fd = open(MAP_PATH, O_RDONLY);
 	str = get_next_line(fd);
 	MAX_Y++;
 	if (!str)
@@ -170,18 +217,18 @@ void ft_count_size(int fd, t_game_map *map)
 		MAX_Y++;
 	close(fd);
 }
-
+// 
 int ft_allocate_map_memory(t_game_map *map)
 {
 	Y = 0;
-	map->map = (char **)malloc(sizeof(char *) * MAX_Y);
-	map->copy = (char **)malloc(sizeof(char *) * MAX_Y);
+	map->map = (char **)malloc(sizeof(char *) * MAX_Y + 1);
+	map->copy = (char **)malloc(sizeof(char *) * MAX_Y + 1);
 	if (!map->map && !map->copy)
 		return 0;
-	while (Y <= MAX_X)
+	while (Y < MAX_Y)
 	{
-		map->map[Y] = (char *)malloc(sizeof(char ) * MAX_X);
-		map->copy[Y] = (char *)malloc(sizeof(char ) * MAX_X);
+		map->map[Y] = (char *)malloc(sizeof(char) * MAX_X);
+		map->copy[Y] = (char *)malloc(sizeof(char) * MAX_X);
 		if (!map->map[Y] && map->copy[Y])
 			return 0;
 		Y++;
@@ -195,7 +242,12 @@ void copy_map(int fd, char ** map, int strings_count)
 	int j;
 	j = 0;
 	fd = open(MAP_PATH, O_RDONLY);
-	while (j <= strings_count)
+	if (!fd)
+	{
+		printf("ERROR!\n");
+		return ;
+	}
+	while (j < strings_count)
 	{
 		map[j] = get_next_line(fd);
 		printf("%s\n", map[j]);
@@ -218,16 +270,17 @@ int main(void)
 	if (!map)
 		puts("Error: Failed to allocate memory for struct");
 	ft_count_size(fd, map);
+	printf("MAX Y: %i\nMAX X: %i\n", MAX_Y, MAX_X);
 	if (!ft_allocate_map_memory(map))
 	{
 		puts("Error: Failed to allocate memory for map");
 		return (1);
 	}
-	copy_map(fd,map->map, MAX_Y);
-	map->copy = map->map;
-	path_handle_experiment(map, 1, 1);
+	copy_map(fd, map->map, MAX_Y);
+	copy_map(fd, map->copy, MAX_Y);
+	if(!map_handle_experiment(MAX_Y, map))
+	// path_handle_experiment(map, 1, 1);
 	free(map);
-	map_handle_experiment(MAX_Y, map);
 	// if (!mlx)
 	// 	puts("Error: Could not initialize mlx");
 	// player = mlx_load_png("./char.png");
