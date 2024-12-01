@@ -6,7 +6,7 @@
 /*   By: aolteanu <aolteanu.student@42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 13:15:51 by aolteanu          #+#    #+#             */
-/*   Updated: 2024/11/29 22:47:33 by aolteanu         ###   ########.fr       */
+/*   Updated: 2024/12/01 15:46:38 by aolteanu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -253,6 +253,7 @@ void copy_map(int fd, char ** map, int strings_count)
 		printf("%s\n", map[j]);
 		j++;
 	}
+	map[j] = "\0";
 	close(fd);
 }
 
