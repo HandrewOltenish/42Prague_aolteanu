@@ -6,7 +6,7 @@
 /*   By: aolteanu <aolteanu.student@42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 12:35:53 by aolteanu          #+#    #+#             */
-/*   Updated: 2024/06/19 15:34:57 by aolteanu         ###   ########.fr       */
+/*   Updated: 2024/12/03 16:40:34 by aolteanu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ char	*ft_get(int fd, char *buffer)
 			return (NULL);
 		}
 		get_buffer[bytes_read] = '\0';
-		buffer = ft_strjoin(buffer, get_buffer);
+		buffer = ft_gnl_strjoin(buffer, get_buffer);
 		if (ft_strchr_gnl(buffer, '\n'))
 			break ;
 	}
