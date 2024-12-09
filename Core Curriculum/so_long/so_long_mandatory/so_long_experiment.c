@@ -6,7 +6,7 @@
 /*   By: aolteanu <aolteanu.student@42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 13:15:51 by aolteanu          #+#    #+#             */
-/*   Updated: 2024/12/01 15:46:38 by aolteanu         ###   ########.fr       */
+/*   Updated: 2024/12/03 16:40:46 by aolteanu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,14 +221,14 @@ void ft_count_size(int fd, t_game_map *map)
 int ft_allocate_map_memory(t_game_map *map)
 {
 	Y = 0;
-	map->map = (char **)malloc(sizeof(char *) * MAX_Y + 1);
-	map->copy = (char **)malloc(sizeof(char *) * MAX_Y + 1);
+	map->map = (char **)ft_calloc(sizeof(char *), MAX_Y + 1);
+	map->copy = (char **)ft_calloc(sizeof(char *), MAX_Y + 1);
 	if (!map->map && !map->copy)
 		return 0;
 	while (Y < MAX_Y)
 	{
-		map->map[Y] = (char *)malloc(sizeof(char) * MAX_X);
-		map->copy[Y] = (char *)malloc(sizeof(char) * MAX_X);
+		map->map[Y] = (char *)ft_calloc(sizeof(char), MAX_X);
+		map->copy[Y] = (char *)ft_calloc(sizeof(char), MAX_X);
 		if (!map->map[Y] && map->copy[Y])
 			return 0;
 		Y++;
@@ -253,10 +253,11 @@ void copy_map(int fd, char ** map, int strings_count)
 		printf("%s\n", map[j]);
 		j++;
 	}
-	map[j] = "\0";
+	map[j] = NULL;
 	close(fd);
 }
-
+// Check GNL function conflicts with LIBFT: some functions are named the same but do different things.
+// Take care of errors
 // Split the functions. One function is doing too many things to accurately track in the future!
 int main(void)
 {
@@ -267,7 +268,7 @@ int main(void)
 	int fd;
 
 	fd = 0;
-	map = (t_game_map *)malloc(sizeof(t_game_map));
+	map = (t_game_map *)ft_calloc(sizeof(t_game_map), 1);
 	if (!map)
 		puts("Error: Failed to allocate memory for struct");
 	ft_count_size(fd, map);
